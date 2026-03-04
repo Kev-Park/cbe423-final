@@ -106,13 +106,13 @@ def main(_):
     #
     # Create data, oracle, and model path for loading
     #
-    data_dir = os.path.join('materials', 'data', 'preprocessed', task_cls)
-    model_dir = os.path.join('materials', 'models', 'states', model_cls, task_cls)
+    data_dir = os.path.join('CliqueFlowmer', 'data', 'preprocessed', task_cls)
+    model_dir = os.path.join('CliqueFlowmer', 'models', 'states', model_cls, task_cls)
 
     #
     # Initialize a Wandb run
     #
-    wandb.init(project=f'{task_cls}-optimize-new', name=f'model_{model_cls}')
+    wandb.init(project=f'{task_cls}', name=f'model_{model_cls}')
     wandb.config.update(FLAGS)
     torch.manual_seed(FLAGS.seed)
     np.random.seed(FLAGS.seed)
@@ -225,14 +225,11 @@ def main(_):
     #
     # Load the model
     #
-    model_path = os.path.join(model_dir, 'BEST: ' + model_spec)
+    model_path = os.path.join(model_dir, model_spec)
     response = saving.load_model_state_dict_from_gcs(bucket, model_path, model)
 
     if response is not None:
         model = response 
-    else:
-        model_path = os.path.join(model_dir, model_spec)
-        model = saving.load_model_state_dict_from_gcs(bucket, model_path, model)
 
     model = nn.DataParallel(model).to(device)
     model.eval()

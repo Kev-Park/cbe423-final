@@ -83,18 +83,18 @@ def main(_):
     #
     # Create data path for loading
     #
-    data_dir = os.path.join('materials', 'data', 'preprocessed', task_cls) # TODO Change 'm3gnet' to 'preprocessed' for mp_e_form data
+    data_dir = os.path.join('CliqueFlowmer', 'data', 'preprocessed', task_cls) 
 
     #
     # Create model path for saving 
     #
-    model_dir = os.path.join('materials', 'models', 'states', model_cls, task_cls)
+    model_dir = os.path.join('CliqueFlowmer', 'models', 'states', model_cls, task_cls)
 
     #
     # Initialize a Wandb run
     #
     if rank == 0:
-        wandb.init(project=f'{task_cls}-preprocessed', name=f'{model_cls}')
+        wandb.init(project=f'{task_cls}', name=f'{model_cls}')
         wandb.config.update(FLAGS)
 
     torch.manual_seed(FLAGS.seed)

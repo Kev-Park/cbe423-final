@@ -1,4 +1,6 @@
-# CliqueFlowmer — Solving Offline Materials Optimization with CliqueFlowmer
+# Solving Offline Materials Optimization with CliqueFlowmer
+
+![CliqueFlowmer overview](cliqueflowmer-figma.png)
 
 This repository contains the reference implementation for *Solving Offline Materials Optimization with CliqueFlowmer* :contentReference[oaicite:0]{index=0}.
 

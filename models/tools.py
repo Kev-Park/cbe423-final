@@ -232,7 +232,7 @@ def batched_beam_search(
     temperature=1.0,
 ):
     """
-    Batched beam search for generating atomic structures with Cliqueformer model.
+    Batched beam search for generating atomic structures with CliqueFlowmer model.
     z: conditioning variable of shape [batch_size, ...]
     Returns: list of 1D LongTensors (token sequences) for each batch element, or None.
     """

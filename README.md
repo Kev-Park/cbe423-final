@@ -64,7 +64,19 @@ pip install -U pip
 pip install -r requirements.txt
 ```
 
-## Training
+### Create storage and logging
+
+If you want to use our training and optimizing scripts:
+>
+>- sign up to Wandb and log in 
+>
+>- create a Google bucket 
+>
+>- put your preprocessed data (materials and property values) in *CliqueFlowmer/data/preprocessed/<task_name>* in the bucket
+>
+>- prepare a directory for storing state dictionaries in *CliqueFlowmer/models/states/<model_name>/<task_name>* in the bucket
+
+### Training
 
 To train the CliqueFlowmer model:
 
@@ -79,7 +91,7 @@ torchrun \
   train.py
 ```
 
-## Material Discovery
+### Material Discovery
 
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \

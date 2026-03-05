@@ -53,7 +53,7 @@ def get_config():
 
 
     config.storage = {
-        'bucket': '<Your Google Bucket'
+        'bucket': '<your_Google_bucket>'
     }
 
 

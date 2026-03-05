@@ -27,8 +27,7 @@ flags.DEFINE_integer('batch_size', int(1024), 'Batch size.')
 flags.DEFINE_integer('N_eval', int(1e2), 'Evaluation frequency.')
 flags.DEFINE_integer('N_save', int(1e4), 'Saving frequency.')
 flags.DEFINE_integer('N_epochs', int(2.5 * 1e4), 'Number of epochs.')
-flags.DEFINE_bool('From_scratch', bool(False), 'Whether to start training from scratch.')
-flags.DEFINE_bool('Double_Flow', bool(False), "Whether to double the flow temperature.")
+flags.DEFINE_bool('From_scratch', bool(True), 'Whether to start training from scratch.')
 flags.DEFINE_bool('offset_atoms', bool(True), 'Whether to offset the lattice lengths by atomns.')
 flags.DEFINE_bool('standardize', bool(False), 'Whether to standardize the targets.')
 flags.DEFINE_bool('augment', bool(False), 'Whether to augment the structures.')
@@ -81,7 +80,7 @@ def main(_):
     model_cls = model_kwargs.pop('cls')
 
     #
-    # Create data path for loading
+    # Create data path for loading. TODO for you: have your data under such a path in your Google bucket. 
     #
     data_dir = os.path.join('CliqueFlowmer', 'data', 'preprocessed', task_cls) 
 
@@ -91,7 +90,7 @@ def main(_):
     model_dir = os.path.join('CliqueFlowmer', 'models', 'states', model_cls, task_cls)
 
     #
-    # Initialize a Wandb run
+    # Initialize a Wandb run. TODO for you: have your data under such a path in your Google bucket.
     #
     if rank == 0:
         wandb.init(project=f'{task_cls}', name=f'{model_cls}')
@@ -187,9 +186,6 @@ def main(_):
             model.beta_vae = 1.
             model.beta_mse = 1.
             
-            if FLAGS.Double_Flow:
-                model.temp_flow *= 2.
-                
     #
     # Make rank 0 broadcast its parameters to all other ranks
     #

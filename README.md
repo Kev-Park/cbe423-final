@@ -6,12 +6,12 @@ This repository contains the reference implementation for *Solving Offline Mater
 <!-- Qualitative results -->
 <p align="center">
   <img src="figures/Dy5Si4_Ge3Sb_2-0.0085.png" width="12%">
-  <img src="figures/Si8SbPt5-0.0541.png" width="12%">
-  <img src="figures/Dy3SiGeSb-0.1399.png" width="12%" />
   <img src="figures/Cu2Si3Sb-0.0222.png" width="12%" />
+  <img src="figures/Dy3SiGeSb-0.1399.png" width="12%" />
   <img src="figures/Dy2CuSi2Sb-0.0610.png" width="12%" />
   <img src="figures/Ge4Sb9-0.0115.png" width="12%" />
   <img src="figures/Dy7_Ge2Sb_2-0.0274.png" width="12%" />
+  <img src="figures/Si8SbPt5-0.0541.png" width="12%">
 </p>
 
 CliqueFlowmer is a domain-specific offline model-based optimization (MBO) method for computational materials discovery. It:

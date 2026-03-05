@@ -1,8 +1,18 @@
 # Solving Offline Materials Optimization with CliqueFlowmer
 
-![CliqueFlowmer overview](cliqueflowmer-figma.png)
 
 This repository contains the reference implementation for *Solving Offline Materials Optimization with CliqueFlowmer* :contentReference[oaicite:0]{index=0}.
+
+<!-- Qualitative results -->
+<p align="center">
+  <img src="figures/Dy3SiGeSb-0.1399.png" width="12%" />
+  <img src="figures/Si8SbPt5-0.0541.png" width="12%">
+  <img src="figures/Dy7CuSi8_GeSb_2-0.0032.png" width="12%">
+  <img src="figures/Cu2Si3Sb-0.0222.png" width="12%" />
+  <img src="figures/Dy2CuSi2Sb-0.0610.png" width="12%" />
+  <img src="figures/Ge4Sb9-0.0115.png" width="12%" />
+  <img src="figures/Dy7_Ge2Sb_2-0.0274.png" width="12%" />
+</p>
 
 CliqueFlowmer is a domain-specific offline model-based optimization (MBO) method for computational materials discovery. It:
 
@@ -12,6 +22,7 @@ CliqueFlowmer is a domain-specific offline model-based optimization (MBO) method
 >
 > **decodes** back into a material by (1) autoregressively decoding atom types (beam search) and (2) sampling geometry with a conditional flow model
 
+![CliqueFlowmer overview](figures/CliqueFlowmer-figma-glow-bigger_page-0001.jpg)
 
 ---
 

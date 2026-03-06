@@ -1,7 +1,7 @@
 # Solving Offline Materials Optimization with CliqueFlowmer
 
 
-This repository contains the reference implementation for *Solving Offline Materials Optimization with CliqueFlowmer* :contentReference[oaicite:0]{index=0}.
+This repository contains the reference implementation for *Solving Offline Materials Optimization with CliqueFlowmer*
 
 <!-- Qualitative results -->
 <p align="center">

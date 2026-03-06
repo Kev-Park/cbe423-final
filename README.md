@@ -1,7 +1,6 @@
-# Solving Offline Materials Optimization with CliqueFlowmer
+# [Solving Offline Materials Optimization with CliqueFlowmer](https://github.com/znowu/CliqueFlowmer)
 
-
-This repository contains the reference implementation for *Solving Offline Materials Optimization with CliqueFlowmer*
+This repository contains the reference implementation for *Offline Materials Optimization with CliqueFlowmer*.
 
 <!-- Qualitative results -->
 <p align="center">

@@ -1,48 +1,20 @@
 # Solving Offline Materials Optimization with CliqueFlowmer
 
-Jakub Grudzien Kuba, Ben Kurt Miller, Sergey Levine, Pieter Abbeel
+<p align="center">
+  <sub><strong>Jakub Grudzien Kuba, Ben Kurt Miller, Sergey Levine, Pieter Abbeel</strong></sub>
+</p>
 
 <p align="center">
   <img src="bair.png" width="320px" />
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/pdf/2603.06082">Paper</a>
+  <a href="https://arxiv.org/pdf/2603.06082"><strong>Paper</strong></a>
 </p>
 
 ---
 
-## Overview
-
-CliqueFlowmer is a domain-specific AI system for computational materials discovery that directly optimizes materials instead of only generating them.
-
-It operates in three stages:
-
-- Encode crystal structures into a latent representation  
-- Optimize the latent space using evolution strategies  
-- Decode optimized latents back into valid materials  
-
----
-
-## Key Features
-
-- Direct property optimization  
-- Hybrid discrete-continuous modeling  
-- Transformer + flow-based architecture  
-- Clique-structured latent space  
-- Fully offline optimization pipeline  
-
----
-
-## Model Pipeline
-
-<p align="center">
-  <img src="figures/CliqueFlowmer-figma-glow-bigger_page-0001.jpg" width="85%">
-</p>
-
----
-
-## Example Outputs
+## ✦ Materials discovered by CliqueFlowmer
 
 <p align="center">
   <img src="figures/Dy5Si4_Ge3Sb_2-0.0085.png" width="12%">
@@ -54,33 +26,76 @@ It operates in three stages:
   <img src="figures/Si8SbPt5-0.0541.png" width="12%">
 </p>
 
+<p align="center">
+  <sub>Examples of optimized crystal structures produced by CliqueFlowmer.</sub>
+</p>
+
+---
+
+## Overview
+
+CliqueFlowmer is a model for **offline computational materials optimization**.
+
+Instead of only generating materials, it:
+
+- encodes crystal structures into a latent space
+- optimizes that latent space using evolution strategies
+- decodes optimized latents back into new candidate materials
+
+This repository contains the reference implementation for
+[*Offline Materials Optimization with CliqueFlowmer*](https://arxiv.org/pdf/2603.06082).
+
+---
+
+## ✦ Model illustration
+
+<p align="center">
+  <img src="figures/CliqueFlowmer-figma-glow-bigger_page-0001.jpg" width="88%">
+</p>
+
+<p align="center">
+  <sub>CliqueFlowmer pipeline: encode materials, optimize latent representations, and decode them back into crystal structures.</sub>
+</p>
+
+---
+
+## Workflow
+
+1. preprocess a dataset of materials and target properties
+2. train CliqueFlowmer
+3. optimize latent representations
+4. decode and evaluate candidate materials
+
 ---
 
 ## Repository Structure
 
+```text
 models/
-  cliqueflowmer.py   Main model (encoder + predictor + decoders)
-  transformer.py     Transformer backbone
-  flow.py            Geometry flow decoder
+  cliqueflowmer.py        # main model (encoder + predictor + decoders)
+  transformer.py          # transformer backbone
+  flow.py                 # flow-based geometry decoder
 
-architectures/       Shared building blocks
+architectures/
+  ...                     # shared building blocks
 
 optimization/
-  learner.py         ES / gradient learners
-  design.py          Optimization loop
-  sun.py             Stability / uniqueness / novelty metrics
+  learner.py              # ES / gradient learners
+  design.py               # latent optimization loop
+  sun.py                  # S.U.N. evaluation
 
 data/
-  tools.py           Dataset + utilities
-  constants.py       Atomic metadata
+  tools.py                # dataset and preprocessing utilities
+  constants.py            # atomic metadata
 
 configs/
-  mp20/              Default setup
-  mp20-bandgap/      Band gap optimization
+  mp20/                   # default configuration
+  mp20-bandgap/           # band gap optimization configuration
 
 scripts/
-  train.py           Distributed training
-  optimize.py        Material discovery
+  train.py                # training entrypoint
+  optimize.py             # material discovery
+```
 
 ---
 
@@ -88,27 +103,35 @@ scripts/
 
 ### Environment
 
+```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -U pip
 pip install -r requirements.txt
+```
 
----
+### Storage
 
-### Storage and Logging
+Expected structure:
 
-- Create a Weights & Biases account  
-- Create a Google Cloud bucket  
-- Upload data to:
-  CliqueFlowmer/data/preprocessed/<task_name>
+```text
+CliqueFlowmer/
+  data/
+    preprocessed/<task_name>/
+  models/
+    states/<model_name>/<task_name>/
+```
 
-- Prepare model storage:
-  CliqueFlowmer/models/states/<model_name>/<task_name>
+If you want to use the training and optimization scripts, you will also need:
+
+- a Weights & Biases account
+- a Google bucket for data and model states
 
 ---
 
 ## Training
 
+```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
 torchrun \
   --nproc_per_node=8 \
@@ -117,20 +140,36 @@ torchrun \
   --master_addr=localhost \
   --master_port=12346 \
   train.py
+```
 
 ---
 
 ## Material Discovery
 
+```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
 python optimize.py
+```
+
+---
+
+## Outputs
+
+After running optimization, you should obtain:
+
+- generated crystal structures
+- evaluated target properties
+- S.U.N. metrics (stability / uniqueness / novelty)
 
 ---
 
 ## Citation
 
-@article{grudzien2026cliqueflowmer,
+```bibtex
+@article{kuba2026offline,
   title={Offline Materials Optimization with CliqueFlowmer},
-  author={Grudzien Kuba, Jakub and Miller, Benjamin Kurt and Levine, Sergey and Abbeel, Pieter},
+  author={Kuba, Jakub Grudzien and Miller, Benjamin Kurt and Levine, Sergey and Abbeel, Pieter},
+  journal={arXiv preprint arXiv:2603.06082},
   year={2026}
 }
+```

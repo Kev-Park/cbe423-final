@@ -104,10 +104,10 @@ scripts/
 ### Environment
 
 ```bash
-python -m venv .venv
+uv venv .venv --python 3.10
 source .venv/bin/activate
-pip install -U pip
-pip install -r requirements.txt
+uv pip install -U pip
+uv pip install -r requirements.txt
 ```
 
 ### Storage

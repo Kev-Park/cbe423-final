@@ -1,3 +1,5 @@
+--extra-index-url https://download.pytorch.org/whl/cu121
+
 absl_py>=2.1.0
 ase>=3.26.0
 m3gnet>=0.2.4

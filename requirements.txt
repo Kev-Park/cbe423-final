@@ -1,11 +1,9 @@
 --extra-index-url https://download.pytorch.org/whl/cu121
 
 numpy<2.0.0
-tensorflow==2.15.0
 torch==2.2.0+cu121
 absl-py>=2.1.0
 ml-collections>=0.1.1
-protobuf>=3.20.3,<5.0.0
 
 ase>=3.22.1
 pymatgen>=2023.12.18

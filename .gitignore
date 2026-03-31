@@ -4,3 +4,4 @@ matenv
 api_key.py
 /mp20/
 /mp20-bandgap/
+*.pth

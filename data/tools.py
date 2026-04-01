@@ -49,7 +49,7 @@ from typing import Tuple, Optional, Any, Callable, Union, Iterable
 #
 from ase.optimize import FIRE, LBFGS, LBFGSLineSearch
 from ase.optimize.precon import PreconLBFGS, Exp
-from ase.constraints import UnitCellFilter
+from ase.filters import UnitCellFilter
 from ase.neighborlist import neighbor_list
 from ase.visualize.plot import plot_atoms
 

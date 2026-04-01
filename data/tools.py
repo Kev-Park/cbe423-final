@@ -47,8 +47,6 @@ from typing import Tuple, Optional, Any, Callable, Union, Iterable
 #
 # Refine a primitive Structure with M3GNet (ASE) and return a primitive Structure
 #
-import matgl
-from matgl.ext.ase import M3GNetCalculator
 from ase.optimize import FIRE, LBFGS, LBFGSLineSearch
 from ase.optimize.precon import PreconLBFGS, Exp
 from ase.constraints import UnitCellFilter
@@ -62,7 +60,6 @@ from ase.data import covalent_radii
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.colors import to_rgba
 
-from matgl import load_model
 import matplotlib.patheffects as pe
 
 
@@ -1533,10 +1530,23 @@ def find_percentiles(targets, alpha=5):
     return lower_q, upper_q
 
 
-def _load_m3gnet_calculator(*, compute_stress: bool = False) -> M3GNetCalculator:
+def _load_m3gnet_calculator(*, compute_stress: bool = False):
     #
     # Load a PES potential that provides energies, forces (and stress if requested)
     #
+    import matgl
+
+    try:
+        from matgl.ext.ase import M3GNetCalculator
+    except ImportError:
+        try:
+            from matgl.ext.ase import PESCalculator as M3GNetCalculator
+        except ImportError as e:
+            raise ImportError(
+                "Could not import an ASE calculator from matgl.ext.ase. "
+                "Tried M3GNetCalculator and PESCalculator."
+            ) from e
+
     potential = matgl.load_model("M3GNet-MP-2021.2.8-PES")
     return M3GNetCalculator(potential=potential, compute_stress=compute_stress)
 
@@ -1644,7 +1654,7 @@ def refine_to_primitive(
     relax_cell: bool = True,      # set True if lattice is likely strained
     target_fmax: float = 0.01,    # a bit looser than 0.01 to avoid ML noise-floor stalls
     steps: int = 6000,             # keep bounded; this routine is speed-oriented
-    calculator: Optional[M3GNetCalculator] = None,
+    calculator: Optional[Any] = None,
 ) -> Structure:
     #
     # Fast, stable relax with staged FIRE only. Always returns primitive cell on success.
@@ -1850,9 +1860,9 @@ def refine_to_primitive_fast_strong(
 
 
 #
-# Load once
+# Load on demand to avoid importing matgl at module import time.
 #
-_megnet_bg = load_model("MEGNet-MP-2019.4.1-BandGap-mfi")
+_megnet_bg = None
 
 # Fidelity index mapping from MatGL tutorial:
 # 0: PBE, 1: GLLB-SC, 2: HSE, 3: SCAN  :contentReference[oaicite:1]{index=1}
@@ -1861,6 +1871,10 @@ _FIDELITY = {"PBE": 0, "GLLB-SC": 1, "HSE": 2, "SCAN": 3}
 
 @torch.no_grad()
 def predict_structure_megnet(structure, *, method: str = "PBE", device: str = "cpu") -> float:
+    global _megnet_bg
+    if _megnet_bg is None:
+        import matgl
+        _megnet_bg = matgl.load_model("MEGNet-MP-2019.4.1-BandGap-mfi")
 
     i = _FIDELITY[method]
     state_attr = torch.tensor([i], device=device)

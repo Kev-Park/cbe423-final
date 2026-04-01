@@ -12,7 +12,7 @@ import torch
 from absl import app, flags
 from ml_collections import config_flags
 
-import saving
+import loading
 import models
 
 
@@ -56,7 +56,7 @@ def build_pretrained_encoder():
 	if not FLAGS.local_checkpoint_path:
 		raise ValueError("--local_checkpoint_path is required. This script only loads local state dicts.")
 
-	loaded = saving.load_model_state_dict_from_local(
+	loaded = loading.load_model_state_dict_from_local(
 		FLAGS.local_checkpoint_path,
 		model,
 	)

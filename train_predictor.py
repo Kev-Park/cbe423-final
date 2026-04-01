@@ -6,15 +6,12 @@ This script follows the same loading pattern as optimize/train:
 3) Extract and optionally freeze only the encoder.
 """
 
-import os
-
 import numpy as np
 import torch
 
 from absl import app, flags
 from ml_collections import config_flags
 
-import data.tools as tools
 import saving
 import models
 
@@ -22,11 +19,6 @@ import models
 FLAGS = flags.FLAGS
 
 flags.DEFINE_integer("seed", 1, "Random seed.")
-flags.DEFINE_string(
-	"save_encoder_state_to",
-	"",
-	"Optional local path to save the extracted encoder state dict (.pth).",
-)
 flags.DEFINE_string(
 	"local_checkpoint_path",
 	"",
@@ -48,25 +40,14 @@ def build_pretrained_encoder():
 	"""Build full model from config, load checkpoint, and return only encoder."""
 	kwargs = dict(**FLAGS.config)
 
-	data_kwargs = dict(kwargs["data"])
 	model_kwargs = dict(kwargs["model"])
-	storage_kwargs = dict(kwargs["storage"])
-
-	task_cls = data_kwargs.pop("task")
 	model_cls = model_kwargs.pop("cls")
-
-	bucket = storage_kwargs.pop("bucket")
 
 	torch.manual_seed(FLAGS.seed)
 	np.random.seed(FLAGS.seed)
 
-	# Recreate the same optional prior setup used by train/optimize.
-	if model_kwargs.pop("mle_prior"):
-		data_dir = os.path.join("CliqueFlowmer", "data", "preprocessed", task_cls)
-		train_data = tools.load_pickled_object_from_gcs(bucket, os.path.join(data_dir, "train"))
-		train_inputs = list(train_data.values())[0]
-		length_mle_vals = tools.length_mle(train_inputs)
-		model_kwargs["initial_length_dist"] = tools.normal_lengths_from_mle(length_mle_vals, device)
+	# This script does encoder-only loading; ignore flow-prior config knobs.
+	model_kwargs.pop("mle_prior", None)
 
 	# 1) Define architecture first.
 	model = getattr(models, model_cls)(**model_kwargs).to(device)
@@ -97,13 +78,6 @@ def build_pretrained_encoder():
 
 def main(_):
 	encoder, _ = build_pretrained_encoder()
-
-	if FLAGS.save_encoder_state_to:
-		out_path = FLAGS.save_encoder_state_to
-		if not out_path.endswith(".pth"):
-			out_path += ".pth"
-		torch.save(encoder.state_dict(), out_path)
-		print(f"Saved encoder state dict to {out_path}")
 
 	n_params = sum(p.numel() for p in encoder.parameters())
 	n_trainable = sum(p.numel() for p in encoder.parameters() if p.requires_grad)

@@ -19,6 +19,6 @@ def preprocess_data(input_path, output_path):
         pickle.dump(data, f)
     
 if __name__ == "__main__":
-    input_path = 'raw_data/train.csv'
-    output_path = 'preprocessed_data/train.pkl'
+    input_path = 'raw_data/test.csv'
+    output_path = 'preprocessed_data/test.pkl'
     preprocess_data(input_path, output_path)

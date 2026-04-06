@@ -1,6 +1,7 @@
 import pickle
 from pymatgen.core import Structure
 import pandas as pd
+from tqdm import tqdm
 
 def preprocess_data(input_path, output_path):
 
@@ -8,7 +9,7 @@ def preprocess_data(input_path, output_path):
     structures = []
     targets = []
 
-    for idx, row in df.iterrows():
+    for idx, row in tqdm(df.iterrows(), total=len(df), desc="Parsing CIF rows"):
         structure = Structure.from_str(row['cif'], fmt='cif')
         structures.append(structure)
         targets.append(row['e_above_hull'])

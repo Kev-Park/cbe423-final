@@ -110,6 +110,7 @@ uv pip install -U pip
 uv pip install -r requirements.txt
 ```
 
+Or for Windows: `.venv\Scripts\activate.bat`
 ### Storage
 
 Expected structure:

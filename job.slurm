@@ -16,4 +16,4 @@ module purge
 
 source .venv/bin/activate
 
-python train_predictor.py --local_checkpoint_path encoder.pth
+python train_predictor.py

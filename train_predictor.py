@@ -154,6 +154,7 @@ def train(model, train_data, val_data):
 		print(
 			f"Epoch {epoch + 1}/{FLAGS.epochs} - "
 			f"train_mse: {train_mse:.6f} - val_mse: {val_mse:.6f}"
+			, flush=True
 		)
 
 	return model

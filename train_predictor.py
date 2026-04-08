@@ -8,22 +8,26 @@ This script follows the same loading pattern as optimize/train:
 
 import numpy as np
 import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader
 
 from absl import app, flags
 from ml_collections import config_flags
 
 import loading
 import models
+import data.tools as tools
 
 
 FLAGS = flags.FLAGS
+PRETRAINED_CHECKPOINT_PATH = "encoder.pth"
 
 flags.DEFINE_integer("seed", 1, "Random seed.")
-flags.DEFINE_string(
-	"local_checkpoint_path",
-	"",
-	"Local checkpoint path (.pth) used to load pretrained model weights.",
-)
+
+# hyperparameters for regressor training
+flags.DEFINE_integer("epochs", 50, "Number of training epochs.")
+flags.DEFINE_integer("batch_size", 32, "Training batch size.")
+flags.DEFINE_float("learning_rate", 1e-3, "Training learning rate.")
 
 config_flags.DEFINE_config_file(
 	"config",
@@ -37,7 +41,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def build_pretrained_encoder():
-	"""Build full model from config, load checkpoint, and return only encoder."""
+	"""Build the pretrained model, load weights, and return only the encoder."""
 	kwargs = dict(**FLAGS.config)
 
 	model_kwargs = dict(kwargs["model"])
@@ -53,16 +57,13 @@ def build_pretrained_encoder():
 	model = getattr(models, model_cls)(**model_kwargs).to(device)
 
 	# 2) Load pretrained weights into that architecture.
-	if not FLAGS.local_checkpoint_path:
-		raise ValueError("--local_checkpoint_path is required. This script only loads local state dicts.")
-
 	loaded = loading.load_model_state_dict_from_local(
-		FLAGS.local_checkpoint_path,
+		PRETRAINED_CHECKPOINT_PATH,
 		model,
 	)
 
 	if loaded is None:
-		raise FileNotFoundError(f"Could not find local checkpoint: {FLAGS.local_checkpoint_path}")
+		raise FileNotFoundError(f"Could not find local checkpoint: {PRETRAINED_CHECKPOINT_PATH}")
 
 	model = loaded.to(device)
 	model.eval()
@@ -72,18 +73,73 @@ def build_pretrained_encoder():
 	for param in encoder.parameters():
 		param.requires_grad = False
 	encoder.eval()
+	encoder.atomic_embedder = model.atomic_emb
 
-	return encoder, model
+	return encoder
 
+def train(model, data):
+	structures = data["structures"]
+	targets = data["targets"]
+
+	dataset = tools.MatbenchDataset(structures, targets, augment=False)
+	loader = DataLoader(
+		dataset,
+		batch_size=FLAGS.batch_size,
+		shuffle=True,
+		collate_fn=tools.collate_structure,
+	)
+
+	criterion = nn.MSELoss()
+	optimizer = torch.optim.Adam(model.regressor.parameters(), lr=FLAGS.learning_rate)
+
+	model.to(device)
+	if model.atomic_embedder is not None:
+		model.atomic_embedder.to(device)
+
+	for epoch in range(FLAGS.epochs):
+		model.train()
+		model.encoder.eval()
+		if model.atomic_embedder is not None:
+			model.atomic_embedder.eval()
+
+		running_loss = 0.0
+
+		for abc, angles, species, positions, mask, batch_targets in loader:
+			abc = abc.to(device)
+			angles = angles.to(device)
+			species = species.to(device)
+			positions = positions.to(device)
+			mask = mask.to(device)
+			batch_targets = batch_targets.to(device).float().view(-1)
+
+			optimizer.zero_grad(set_to_none=True)
+			predictions = model(abc, angles, species, positions, mask).view(-1)
+			loss = criterion(predictions, batch_targets)
+			loss.backward()
+			optimizer.step()
+
+			running_loss += loss.item() * batch_targets.size(0)
+
+		mean_loss = running_loss / len(dataset)
+		print(f"Epoch {epoch + 1}/{FLAGS.epochs} - mse: {mean_loss:.6f}")
+
+	return model
 
 def main(_):
-	encoder, _ = build_pretrained_encoder()
+	encoder = build_pretrained_encoder()
+	data = loading.load_pickled_object_from_local("preprocessed_data/train.pkl")
+	if data is None:
+		raise FileNotFoundError("Could not find local data pickle: preprocessed_data/train.pkl")
 
-	n_params = sum(p.numel() for p in encoder.parameters())
-	n_trainable = sum(p.numel() for p in encoder.parameters() if p.requires_grad)
-	print("Loaded pretrained encoder successfully.")
-	print(f"Encoder params: {n_params}")
-	print(f"Trainable params: {n_trainable}")
+	predictor = models.EncoderPredictor(
+		encoder,
+		atomic_embedder=getattr(encoder, "atomic_embedder", None),
+	).to(device)
+	predictor.eval()
+
+	trained_predictor = train(predictor, data)
+
+	return trained_predictor
 
 
 if __name__ == "__main__":

@@ -73,19 +73,31 @@ def build_pretrained_encoder():
 	for param in encoder.parameters():
 		param.requires_grad = False
 	encoder.eval()
+	if hasattr(encoder, "index_matrix"):
+		encoder.index_matrix = encoder.index_matrix.to(device)
 	encoder.atomic_embedder = model.atomic_emb
 
 	return encoder
 
-def train(model, data):
-	structures = data["structures"]
-	targets = data["targets"]
+def train(model, train_data, val_data):
+	train_structures = train_data["structures"]
+	train_targets = train_data["targets"]
+	val_structures = val_data["structures"]
+	val_targets = val_data["targets"]
 
-	dataset = tools.MatbenchDataset(structures, targets, augment=False)
-	loader = DataLoader(
-		dataset,
+	train_dataset = tools.MatbenchDataset(train_structures, train_targets, augment=False)
+	val_dataset = tools.MatbenchDataset(val_structures, val_targets, augment=False)
+
+	train_loader = DataLoader(
+		train_dataset,
 		batch_size=FLAGS.batch_size,
 		shuffle=True,
+		collate_fn=tools.collate_structure,
+	)
+	val_loader = DataLoader(
+		val_dataset,
+		batch_size=FLAGS.batch_size,
+		shuffle=False,
 		collate_fn=tools.collate_structure,
 	)
 
@@ -102,9 +114,9 @@ def train(model, data):
 		if model.atomic_embedder is not None:
 			model.atomic_embedder.eval()
 
-		running_loss = 0.0
+		running_train_loss = 0.0
 
-		for abc, angles, species, positions, mask, batch_targets in loader:
+		for abc, angles, species, positions, mask, batch_targets in train_loader:
 			abc = abc.to(device)
 			angles = angles.to(device)
 			species = species.to(device)
@@ -118,18 +130,42 @@ def train(model, data):
 			loss.backward()
 			optimizer.step()
 
-			running_loss += loss.item() * batch_targets.size(0)
+			running_train_loss += loss.item() * batch_targets.size(0)
 
-		mean_loss = running_loss / len(dataset)
-		print(f"Epoch {epoch + 1}/{FLAGS.epochs} - mse: {mean_loss:.6f}")
+		train_mse = running_train_loss / len(train_dataset)
+
+		model.eval()
+		running_val_loss = 0.0
+		with torch.no_grad():
+			for abc, angles, species, positions, mask, batch_targets in val_loader:
+				abc = abc.to(device)
+				angles = angles.to(device)
+				species = species.to(device)
+				positions = positions.to(device)
+				mask = mask.to(device)
+				batch_targets = batch_targets.to(device).float().view(-1)
+
+				predictions = model(abc, angles, species, positions, mask).view(-1)
+				val_loss = criterion(predictions, batch_targets)
+				running_val_loss += val_loss.item() * batch_targets.size(0)
+
+		val_mse = running_val_loss / len(val_dataset)
+
+		print(
+			f"Epoch {epoch + 1}/{FLAGS.epochs} - "
+			f"train_mse: {train_mse:.6f} - val_mse: {val_mse:.6f}"
+		)
 
 	return model
 
 def main(_):
 	encoder = build_pretrained_encoder()
-	data = loading.load_pickled_object_from_local("preprocessed_data/train.pkl")
-	if data is None:
+	train_data = loading.load_pickled_object_from_local("preprocessed_data/train.pkl")
+	if train_data is None:
 		raise FileNotFoundError("Could not find local data pickle: preprocessed_data/train.pkl")
+	val_data = loading.load_pickled_object_from_local("preprocessed_data/val.pkl")
+	if val_data is None:
+		raise FileNotFoundError("Could not find local data pickle: preprocessed_data/val.pkl")
 
 	predictor = models.EncoderPredictor(
 		encoder,
@@ -137,7 +173,7 @@ def main(_):
 	).to(device)
 	predictor.eval()
 
-	trained_predictor = train(predictor, data)
+	trained_predictor = train(predictor, train_data, val_data)
 
 	return trained_predictor
 

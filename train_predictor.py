@@ -101,9 +101,6 @@ def train(model, train_data, val_data):
 		collate_fn=tools.collate_structure,
 	)
 
-	target_mean = float(train_data.get("target_mean", 0.0))
-	target_std = float(train_data.get("target_std", 1.0))
-
 	criterion = nn.MSELoss()
 	optimizer = torch.optim.Adam(model.regressor.parameters(), lr=FLAGS.learning_rate)
 
@@ -159,13 +156,11 @@ def train(model, train_data, val_data):
 
 		val_mse = running_val_loss / len(val_dataset)
 
-		preds_z = torch.cat(all_preds)
-		targets_z = torch.cat(all_targets)
-		preds_phys = preds_z * target_std + target_mean
-		targets_phys = targets_z * target_std + target_mean
-		val_mae = torch.mean(torch.abs(preds_phys - targets_phys)).item()
-		ss_res = torch.sum((targets_phys - preds_phys) ** 2).item()
-		ss_tot = torch.sum((targets_phys - torch.mean(targets_phys)) ** 2).item()
+		preds = torch.cat(all_preds)
+		targets = torch.cat(all_targets)
+		val_mae = torch.mean(torch.abs(preds - targets)).item()
+		ss_res = torch.sum((targets - preds) ** 2).item()
+		ss_tot = torch.sum((targets - torch.mean(targets)) ** 2).item()
 		val_r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
 
 		print(

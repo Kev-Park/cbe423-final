@@ -13,7 +13,7 @@ def preprocess_data(input_path, output_path, target_mean, target_std):
     for _, row in tqdm(df.iterrows(), total=len(df), desc=f"Parsing {input_path}"):
         structure = Structure.from_str(row['cif'], fmt='cif')
         structures.append(structure)
-        raw_targets.append(row['e_above_hull'])
+        raw_targets.append(row['formation_energy_per_atom'])
 
     raw_targets = np.asarray(raw_targets, dtype=np.float64)
     targets = (raw_targets - target_mean) / target_std
@@ -31,7 +31,7 @@ def preprocess_data(input_path, output_path, target_mean, target_std):
 
 def compute_train_stats(train_csv_path):
     df = pd.read_csv(train_csv_path)
-    raw = df['e_above_hull'].to_numpy(dtype=np.float64)
+    raw = df['formation_energy_per_atom'].to_numpy(dtype=np.float64)
     mean = raw.mean()
     std = raw.std()
     if std == 0:

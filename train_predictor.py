@@ -101,6 +101,9 @@ def train(model, train_data, val_data):
 		collate_fn=tools.collate_structure,
 	)
 
+	target_mean = float(train_data.get("target_mean", 0.0))
+	target_std = float(train_data.get("target_std", 1.0))
+
 	criterion = nn.MSELoss()
 	optimizer = torch.optim.Adam(model.regressor.parameters(), lr=FLAGS.learning_rate)
 
@@ -136,6 +139,8 @@ def train(model, train_data, val_data):
 
 		model.eval()
 		running_val_loss = 0.0
+		all_preds = []
+		all_targets = []
 		with torch.no_grad():
 			for abc, angles, species, positions, mask, batch_targets in val_loader:
 				abc = abc.to(device)
@@ -149,11 +154,24 @@ def train(model, train_data, val_data):
 				val_loss = criterion(predictions, batch_targets)
 				running_val_loss += val_loss.item() * batch_targets.size(0)
 
+				all_preds.append(predictions.detach().cpu())
+				all_targets.append(batch_targets.detach().cpu())
+
 		val_mse = running_val_loss / len(val_dataset)
+
+		preds_z = torch.cat(all_preds)
+		targets_z = torch.cat(all_targets)
+		preds_phys = preds_z * target_std + target_mean
+		targets_phys = targets_z * target_std + target_mean
+		val_mae = torch.mean(torch.abs(preds_phys - targets_phys)).item()
+		ss_res = torch.sum((targets_phys - preds_phys) ** 2).item()
+		ss_tot = torch.sum((targets_phys - torch.mean(targets_phys)) ** 2).item()
+		val_r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
 
 		print(
 			f"Epoch {epoch + 1}/{FLAGS.epochs} - "
-			f"train_mse: {train_mse:.6f} - val_mse: {val_mse:.6f}"
+			f"train_mse: {train_mse:.6f} - val_mse: {val_mse:.6f} - "
+			f"val_mae: {val_mae:.6f} - val_r2: {val_r2:.4f}"
 			, flush=True
 		)
 

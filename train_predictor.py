@@ -6,6 +6,9 @@ This script follows the same loading pattern as optimize/train:
 3) Extract and optionally freeze only the encoder.
 """
 
+import os
+from datetime import datetime
+
 import numpy as np
 import torch
 import torch.nn as nn
@@ -28,6 +31,7 @@ flags.DEFINE_integer("seed", 1, "Random seed.")
 flags.DEFINE_integer("epochs", 50, "Number of training epochs.")
 flags.DEFINE_integer("batch_size", 32, "Training batch size.")
 flags.DEFINE_float("learning_rate", 1e-3, "Training learning rate.")
+flags.DEFINE_integer("checkpoint_every", 5, "Save a checkpoint every N epochs.")
 
 config_flags.DEFINE_config_file(
 	"config",
@@ -80,6 +84,10 @@ def build_pretrained_encoder():
 	return encoder
 
 def train(model, train_data, val_data):
+	checkpoint_dir = os.path.join("checkpoints", datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
+	os.makedirs(checkpoint_dir, exist_ok=True)
+	print(f"Saving checkpoints to {checkpoint_dir}", flush=True)
+
 	train_structures = train_data["structures"]
 	train_targets = train_data["targets"]
 	val_structures = val_data["structures"]
@@ -158,8 +166,9 @@ def train(model, train_data, val_data):
 
 		preds = torch.cat(all_preds)
 		targets = torch.cat(all_targets)
-		val_mae = torch.mean(torch.abs(preds - targets)).item()
-		ss_res = torch.sum((targets - preds) ** 2).item()
+		diff = preds - targets
+		val_mae = torch.mean(torch.abs(diff)).item()
+		ss_res = torch.sum(diff ** 2).item()
 		ss_tot = torch.sum((targets - torch.mean(targets)) ** 2).item()
 		val_r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
 
@@ -170,7 +179,66 @@ def train(model, train_data, val_data):
 			, flush=True
 		)
 
+		if (epoch + 1) % FLAGS.checkpoint_every == 0:
+			ckpt_path = os.path.join(checkpoint_dir, f"model_{epoch + 1}.pt")
+			torch.save(model.state_dict(), ckpt_path)
+			print(f"Saved checkpoint: {ckpt_path}", flush=True)
+
 	return model
+
+
+def evaluate(model, test_data):
+	test_structures = test_data["structures"]
+	test_targets = test_data["targets"]
+
+	test_dataset = tools.MatbenchDataset(test_structures, test_targets, augment=False)
+	test_loader = DataLoader(
+		test_dataset,
+		batch_size=FLAGS.batch_size,
+		shuffle=False,
+		collate_fn=tools.collate_structure,
+	)
+
+	criterion = nn.MSELoss()
+	model.to(device)
+	if model.atomic_embedder is not None:
+		model.atomic_embedder.to(device)
+	model.eval()
+
+	running_loss = 0.0
+	all_preds = []
+	all_targets = []
+	with torch.no_grad():
+		for abc, angles, species, positions, mask, batch_targets in test_loader:
+			abc = abc.to(device)
+			angles = angles.to(device)
+			species = species.to(device)
+			positions = positions.to(device)
+			mask = mask.to(device)
+			batch_targets = batch_targets.to(device).float().view(-1)
+
+			predictions = model(abc, angles, species, positions, mask).view(-1)
+			loss = criterion(predictions, batch_targets)
+			running_loss += loss.item() * batch_targets.size(0)
+
+			all_preds.append(predictions.detach().cpu())
+			all_targets.append(batch_targets.detach().cpu())
+
+	test_mse = running_loss / len(test_dataset)
+	preds = torch.cat(all_preds)
+	targets = torch.cat(all_targets)
+	diff = preds - targets
+	test_mae = torch.mean(torch.abs(diff)).item()
+	ss_res = torch.sum(diff ** 2).item()
+	ss_tot = torch.sum((targets - torch.mean(targets)) ** 2).item()
+	test_r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
+
+	print(
+		f"Test - test_mse: {test_mse:.6f} - "
+		f"test_mae: {test_mae:.6f} - test_r2: {test_r2:.4f}"
+		, flush=True
+	)
+
 
 def main(_):
 	encoder = build_pretrained_encoder()
@@ -180,6 +248,9 @@ def main(_):
 	val_data = loading.load_pickled_object_from_local("preprocessed_data/val.pkl")
 	if val_data is None:
 		raise FileNotFoundError("Could not find local data pickle: preprocessed_data/val.pkl")
+	test_data = loading.load_pickled_object_from_local("preprocessed_data/test.pkl")
+	if test_data is None:
+		raise FileNotFoundError("Could not find local data pickle: preprocessed_data/test.pkl")
 
 	predictor = models.EncoderPredictor(
 		encoder,
@@ -188,8 +259,7 @@ def main(_):
 	predictor.eval()
 
 	trained_predictor = train(predictor, train_data, val_data)
-
-	return trained_predictor
+	evaluate(trained_predictor, test_data)
 
 
 if __name__ == "__main__":

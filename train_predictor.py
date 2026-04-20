@@ -92,6 +92,8 @@ def train(model, train_data, val_data):
 	train_targets = train_data["targets"]
 	val_structures = val_data["structures"]
 	val_targets = val_data["targets"]
+	target_mean = float(train_data.get("target_mean", 0.0))
+	target_std = float(train_data.get("target_std", 1.0))
 
 	train_dataset = tools.MatbenchDataset(train_structures, train_targets, augment=False)
 	val_dataset = tools.MatbenchDataset(val_structures, val_targets, augment=False)
@@ -172,10 +174,17 @@ def train(model, train_data, val_data):
 		ss_tot = torch.sum((targets - torch.mean(targets)) ** 2).item()
 		val_r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
 
+		phys_diff = diff * target_std
+		val_mae_phys = torch.mean(torch.abs(phys_diff)).item()
+		val_mse_phys = torch.mean(phys_diff ** 2).item()
+		train_mse_phys = train_mse * (target_std ** 2)
+
 		print(
 			f"Epoch {epoch + 1}/{FLAGS.epochs} - "
-			f"train_mse: {train_mse:.6f} - val_mse: {val_mse:.6f} - "
-			f"val_mae: {val_mae:.6f} - val_r2: {val_r2:.4f}"
+			f"train_mse: {train_mse:.6f} ({train_mse_phys:.6f} eV²/atom²) - "
+			f"val_mse: {val_mse:.6f} ({val_mse_phys:.6f} eV²/atom²) - "
+			f"val_mae: {val_mae:.6f} ({val_mae_phys:.6f} eV/atom) - "
+			f"val_r2: {val_r2:.4f}"
 			, flush=True
 		)
 
@@ -190,6 +199,8 @@ def train(model, train_data, val_data):
 def evaluate(model, test_data):
 	test_structures = test_data["structures"]
 	test_targets = test_data["targets"]
+	target_mean = float(test_data.get("target_mean", 0.0))
+	target_std = float(test_data.get("target_std", 1.0))
 
 	test_dataset = tools.MatbenchDataset(test_structures, test_targets, augment=False)
 	test_loader = DataLoader(
@@ -233,9 +244,14 @@ def evaluate(model, test_data):
 	ss_tot = torch.sum((targets - torch.mean(targets)) ** 2).item()
 	test_r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
 
+	phys_diff = diff * target_std
+	test_mae_phys = torch.mean(torch.abs(phys_diff)).item()
+	test_mse_phys = torch.mean(phys_diff ** 2).item()
+
 	print(
-		f"Test - test_mse: {test_mse:.6f} - "
-		f"test_mae: {test_mae:.6f} - test_r2: {test_r2:.4f}"
+		f"Test - test_mse: {test_mse:.6f} ({test_mse_phys:.6f} eV²/atom²) - "
+		f"test_mae: {test_mae:.6f} ({test_mae_phys:.6f} eV/atom) - "
+		f"test_r2: {test_r2:.4f}"
 		, flush=True
 	)
 

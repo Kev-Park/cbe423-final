@@ -53,6 +53,10 @@ def load_hf_model():
     model.load_state_dict(state_dict)
     model.eval()
 
+    # index_matrix is a plain tensor attribute (not a buffer), so .to(device) misses it
+    model.encoder.index_matrix = model.encoder.index_matrix.to(device)
+    model.index_matrix = model.index_matrix.to(device)
+
     return model
 
 

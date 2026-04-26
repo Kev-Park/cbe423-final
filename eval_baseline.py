@@ -96,8 +96,9 @@ def evaluate_baseline(model, test_data, target_mean=None, target_std=None):
     model.to(device)
     model.eval()
 
-    all_preds = []
     all_targets = []
+
+    preds_by_variant = {"target_regressor (mu)": [], "regressor (mu)": [], "regressor (sampled)": []}
 
     with torch.no_grad():
         for abc, angles, species, positions, mask, batch_targets in test_loader:
@@ -109,45 +110,56 @@ def evaluate_baseline(model, test_data, target_mean=None, target_std=None):
             batch_targets = batch_targets.to(device).float().view(-1)
 
             atomic_emb = model.atomic_emb(species.long())
-            z_sep, _ = model.encoder(abc, angles, atomic_emb, positions, mask, separate=True)
-            predictions = model.target_regressor(z_sep).view(-1)
 
-            all_preds.append(predictions.cpu())
+            # Flat (unseparated) mu and sigma from the encoder
+            mu, sigma = model.encoder(abc, angles, atomic_emb, positions, mask, separate=False)
+            z_sep = model.encoder(abc, angles, atomic_emb, positions, mask, separate=True)[0]
+
+            # variant 1: target_regressor with clean mu (Polyak-averaged head)
+            preds_by_variant["target_regressor (mu)"].append(
+                model.target_regressor(z_sep).view(-1).cpu()
+            )
+            # variant 2: regressor with clean mu (directly-trained head, training-protocol z path)
+            preds_by_variant["regressor (mu)"].append(
+                model.predict(mu).view(-1).cpu()
+            )
+            # variant 3: regressor with sampled z — matches the exact training-time distribution
+            z_sampled = mu + sigma * torch.randn_like(mu)
+            preds_by_variant["regressor (sampled)"].append(
+                model.predict(z_sampled).view(-1).cpu()
+            )
+
             all_targets.append(batch_targets.cpu())
 
     criterion = nn.MSELoss()
-    preds = torch.cat(all_preds)
     targets = torch.cat(all_targets)
-
     print(
-        f"  preds:   mean={preds.mean():.4f}  std={preds.std():.4f}  "
-        f"min={preds.min():.4f}  max={preds.max():.4f}",
-        flush=True,
-    )
-    print(
-        f"  targets: mean={targets.mean():.4f}  std={targets.std():.4f}  "
-        f"min={targets.min():.4f}  max={targets.max():.4f}",
+        f"  targets: mean={targets.mean():.4f}  std={targets.std():.4f}",
         flush=True,
     )
 
-    test_mse = criterion(preds, targets).item()
-    diff = preds - targets
-    test_mae = torch.mean(torch.abs(diff)).item()
-    ss_res = torch.sum(diff ** 2).item()
-    ss_tot = torch.sum((targets - torch.mean(targets)) ** 2).item()
-    test_r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
-
-    phys_diff = diff * target_std
-    test_mae_phys = torch.mean(torch.abs(phys_diff)).item()
-    test_mse_phys = torch.mean(phys_diff ** 2).item()
-
-    print(
-        f"Baseline (HF target_regressor) - "
-        f"test_mse: {test_mse:.6f} ({test_mse_phys:.6f} eV²/atom²) - "
-        f"test_mae: {test_mae:.6f} ({test_mae_phys:.6f} eV/atom) - "
-        f"test_r2: {test_r2:.4f}",
-        flush=True,
-    )
+    for variant, pred_list in preds_by_variant.items():
+        preds = torch.cat(pred_list)
+        print(
+            f"  {variant}: mean={preds.mean():.4f}  std={preds.std():.4f}",
+            flush=True,
+        )
+        test_mse = criterion(preds, targets).item()
+        diff = preds - targets
+        test_mae = torch.mean(torch.abs(diff)).item()
+        ss_res = torch.sum(diff ** 2).item()
+        ss_tot = torch.sum((targets - torch.mean(targets)) ** 2).item()
+        test_r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
+        phys_diff = diff * target_std
+        test_mae_phys = torch.mean(torch.abs(phys_diff)).item()
+        test_mse_phys = torch.mean(phys_diff ** 2).item()
+        print(
+            f"  [{variant}] - "
+            f"test_mse: {test_mse:.6f} ({test_mse_phys:.6f} eV²/atom²) - "
+            f"test_mae: {test_mae:.6f} ({test_mae_phys:.6f} eV/atom) - "
+            f"test_r2: {test_r2:.4f}",
+            flush=True,
+        )
 
 
 if __name__ == "__main__":

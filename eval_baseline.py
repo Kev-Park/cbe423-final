@@ -60,11 +60,37 @@ def load_hf_model():
     return model
 
 
-def evaluate_baseline(model, test_data):
-    """Run evaluation and print metrics matching train_predictor.py's evaluate()."""
+def evaluate_baseline(model, test_data, target_mean=None, target_std=None):
+    """Run evaluation and print metrics matching train_predictor.py's evaluate().
+
+    target_mean / target_std override whatever is stored in test_data.  Pass them
+    when test_form.pkl contains raw (unnormalized) targets and you want to supply
+    the training-set normalization statistics explicitly.
+    """
+    import numpy as np
+
     test_structures = test_data["structures"]
-    test_targets = test_data["targets"]
-    target_std = float(test_data.get("target_std", 1.0))
+    raw_targets = test_data["targets"]
+
+    if target_mean is None:
+        target_mean = float(test_data.get("target_mean", 0.0))
+    if target_std is None:
+        target_std = float(test_data.get("target_std", 1.0))
+
+    # If targets look raw (physical scale, large spread) re-normalize them so they
+    # match the z-scored space the HF regressor was trained to predict in.
+    arr = np.array(raw_targets, dtype=np.float32)
+    looks_raw = abs(float(np.mean(arr))) > 0.5 or float(np.std(arr)) > 1.5
+    if looks_raw:
+        print(
+            f"test_form.pkl targets appear unnormalized "
+            f"(mean={np.mean(arr):.3f}, std={np.std(arr):.3f}). "
+            f"Applying z-score with target_mean={target_mean:.4f}, target_std={target_std:.4f}.",
+            flush=True,
+        )
+        test_targets = ((arr - target_mean) / target_std).tolist()
+    else:
+        test_targets = raw_targets
 
     test_dataset = tools.MatbenchDataset(test_structures, test_targets, augment=False)
     test_loader = DataLoader(
@@ -122,7 +148,17 @@ def evaluate_baseline(model, test_data):
 
 if __name__ == "__main__":
     model = load_hf_model()
+
     test_data = loading.load_pickled_object_from_local(TEST_DATA_PATH)
     if test_data is None:
         raise FileNotFoundError(f"Could not find {TEST_DATA_PATH}")
-    evaluate_baseline(model, test_data)
+
+    # Pull normalization stats from train.pkl so they match the HF model's training scale.
+    train_data = loading.load_pickled_object_from_local("preprocessed_data/train.pkl")
+    if train_data is None:
+        raise FileNotFoundError("Could not find preprocessed_data/train.pkl for normalization stats")
+    target_mean = float(train_data.get("target_mean", 0.0))
+    target_std = float(train_data.get("target_std", 1.0))
+    print(f"Normalization from train.pkl: mean={target_mean:.4f}, std={target_std:.4f}", flush=True)
+
+    evaluate_baseline(model, test_data, target_mean=target_mean, target_std=target_std)

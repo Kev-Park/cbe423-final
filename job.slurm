@@ -16,4 +16,5 @@ module purge
 
 source .venv/bin/activate
 
-python train_predictor.py --epochs=250 --batch_size=128 --learning_rate=1e-5 --checkpoint_every=10
+#python train_predictor.py --epochs=250 --batch_size=128 --learning_rate=1e-5 --checkpoint_every=10
+python eval_baseline.py

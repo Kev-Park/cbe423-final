@@ -1,0 +1,279 @@
+/scratch/network/kp0374/cbe423-final/.venv/lib/python3.10/site-packages/google/api_core/_python_version_support.py:263: FutureWarning: You are using a Python version (3.10.20) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.
+  warnings.warn(message, FutureWarning)
+Saving checkpoints to checkpoints/2026-04-20_15-29-54
+Epoch 1/250 - train_mse: 0.960511 (1.017768 eV²/atom²) - val_mse: 0.851765 (0.902539 eV²/atom²) - val_mae: 0.775980 (0.798774 eV/atom) - val_r2: 0.1413
+Epoch 2/250 - train_mse: 0.785915 (0.832764 eV²/atom²) - val_mse: 0.693023 (0.734334 eV²/atom²) - val_mae: 0.692516 (0.712857 eV/atom) - val_r2: 0.3014
+Epoch 3/250 - train_mse: 0.636134 (0.674055 eV²/atom²) - val_mse: 0.563036 (0.596598 eV²/atom²) - val_mae: 0.616321 (0.634425 eV/atom) - val_r2: 0.4324
+Epoch 4/250 - train_mse: 0.509919 (0.540316 eV²/atom²) - val_mse: 0.440983 (0.467271 eV²/atom²) - val_mae: 0.536145 (0.551894 eV/atom) - val_r2: 0.5555
+Epoch 5/250 - train_mse: 0.404035 (0.428120 eV²/atom²) - val_mse: 0.343463 (0.363937 eV²/atom²) - val_mae: 0.465135 (0.478798 eV/atom) - val_r2: 0.6538
+Epoch 6/250 - train_mse: 0.314372 (0.333112 eV²/atom²) - val_mse: 0.263167 (0.278854 eV²/atom²) - val_mae: 0.399131 (0.410855 eV/atom) - val_r2: 0.7347
+Epoch 7/250 - train_mse: 0.244762 (0.259353 eV²/atom²) - val_mse: 0.201457 (0.213466 eV²/atom²) - val_mae: 0.345813 (0.355970 eV/atom) - val_r2: 0.7969
+Epoch 8/250 - train_mse: 0.192228 (0.203687 eV²/atom²) - val_mse: 0.155887 (0.165180 eV²/atom²) - val_mae: 0.302241 (0.311119 eV/atom) - val_r2: 0.8429
+Epoch 9/250 - train_mse: 0.154751 (0.163976 eV²/atom²) - val_mse: 0.124188 (0.131590 eV²/atom²) - val_mae: 0.270822 (0.278777 eV/atom) - val_r2: 0.8748
+Epoch 10/250 - train_mse: 0.127929 (0.135555 eV²/atom²) - val_mse: 0.103140 (0.109289 eV²/atom²) - val_mae: 0.247409 (0.254676 eV/atom) - val_r2: 0.8960
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_10.pt
+Epoch 11/250 - train_mse: 0.110802 (0.117407 eV²/atom²) - val_mse: 0.086563 (0.091723 eV²/atom²) - val_mae: 0.228131 (0.234832 eV/atom) - val_r2: 0.9127
+Epoch 12/250 - train_mse: 0.097057 (0.102843 eV²/atom²) - val_mse: 0.075688 (0.080200 eV²/atom²) - val_mae: 0.213054 (0.219312 eV/atom) - val_r2: 0.9237
+Epoch 13/250 - train_mse: 0.087973 (0.093217 eV²/atom²) - val_mse: 0.068874 (0.072980 eV²/atom²) - val_mae: 0.204905 (0.210924 eV/atom) - val_r2: 0.9306
+Epoch 14/250 - train_mse: 0.081677 (0.086546 eV²/atom²) - val_mse: 0.063106 (0.066867 eV²/atom²) - val_mae: 0.195767 (0.201517 eV/atom) - val_r2: 0.9364
+Epoch 15/250 - train_mse: 0.076359 (0.080910 eV²/atom²) - val_mse: 0.058140 (0.061605 eV²/atom²) - val_mae: 0.187233 (0.192732 eV/atom) - val_r2: 0.9414
+Epoch 16/250 - train_mse: 0.071663 (0.075935 eV²/atom²) - val_mse: 0.054249 (0.057483 eV²/atom²) - val_mae: 0.180650 (0.185956 eV/atom) - val_r2: 0.9453
+Epoch 17/250 - train_mse: 0.067998 (0.072052 eV²/atom²) - val_mse: 0.051039 (0.054082 eV²/atom²) - val_mae: 0.174936 (0.180074 eV/atom) - val_r2: 0.9485
+Epoch 18/250 - train_mse: 0.064890 (0.068758 eV²/atom²) - val_mse: 0.047565 (0.050400 eV²/atom²) - val_mae: 0.168997 (0.173961 eV/atom) - val_r2: 0.9521
+Epoch 19/250 - train_mse: 0.063117 (0.066879 eV²/atom²) - val_mse: 0.046052 (0.048797 eV²/atom²) - val_mae: 0.165255 (0.170109 eV/atom) - val_r2: 0.9536
+Epoch 20/250 - train_mse: 0.059686 (0.063243 eV²/atom²) - val_mse: 0.042920 (0.045478 eV²/atom²) - val_mae: 0.159482 (0.164167 eV/atom) - val_r2: 0.9567
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_20.pt
+Epoch 21/250 - train_mse: 0.057349 (0.060768 eV²/atom²) - val_mse: 0.041928 (0.044428 eV²/atom²) - val_mae: 0.157863 (0.162500 eV/atom) - val_r2: 0.9577
+Epoch 22/250 - train_mse: 0.054597 (0.057852 eV²/atom²) - val_mse: 0.039501 (0.041856 eV²/atom²) - val_mae: 0.151415 (0.155862 eV/atom) - val_r2: 0.9602
+Epoch 23/250 - train_mse: 0.052757 (0.055902 eV²/atom²) - val_mse: 0.037951 (0.040213 eV²/atom²) - val_mae: 0.148429 (0.152789 eV/atom) - val_r2: 0.9617
+Epoch 24/250 - train_mse: 0.050960 (0.053997 eV²/atom²) - val_mse: 0.036274 (0.038436 eV²/atom²) - val_mae: 0.145017 (0.149276 eV/atom) - val_r2: 0.9634
+Epoch 25/250 - train_mse: 0.049395 (0.052339 eV²/atom²) - val_mse: 0.034769 (0.036841 eV²/atom²) - val_mae: 0.141376 (0.145529 eV/atom) - val_r2: 0.9650
+Epoch 26/250 - train_mse: 0.047459 (0.050288 eV²/atom²) - val_mse: 0.034360 (0.036408 eV²/atom²) - val_mae: 0.140586 (0.144716 eV/atom) - val_r2: 0.9654
+Epoch 27/250 - train_mse: 0.045976 (0.048717 eV²/atom²) - val_mse: 0.033050 (0.035020 eV²/atom²) - val_mae: 0.137768 (0.141815 eV/atom) - val_r2: 0.9667
+Epoch 28/250 - train_mse: 0.044826 (0.047498 eV²/atom²) - val_mse: 0.031792 (0.033687 eV²/atom²) - val_mae: 0.134893 (0.138856 eV/atom) - val_r2: 0.9680
+Epoch 29/250 - train_mse: 0.043039 (0.045605 eV²/atom²) - val_mse: 0.031217 (0.033078 eV²/atom²) - val_mae: 0.132358 (0.136246 eV/atom) - val_r2: 0.9685
+Epoch 30/250 - train_mse: 0.042178 (0.044693 eV²/atom²) - val_mse: 0.030019 (0.031808 eV²/atom²) - val_mae: 0.130474 (0.134307 eV/atom) - val_r2: 0.9697
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_30.pt
+Epoch 31/250 - train_mse: 0.041193 (0.043649 eV²/atom²) - val_mse: 0.029615 (0.031381 eV²/atom²) - val_mae: 0.129164 (0.132958 eV/atom) - val_r2: 0.9701
+Epoch 32/250 - train_mse: 0.040437 (0.042847 eV²/atom²) - val_mse: 0.029304 (0.031051 eV²/atom²) - val_mae: 0.128364 (0.132134 eV/atom) - val_r2: 0.9705
+Epoch 33/250 - train_mse: 0.039260 (0.041600 eV²/atom²) - val_mse: 0.028366 (0.030057 eV²/atom²) - val_mae: 0.125834 (0.129530 eV/atom) - val_r2: 0.9714
+Epoch 34/250 - train_mse: 0.038237 (0.040516 eV²/atom²) - val_mse: 0.027851 (0.029511 eV²/atom²) - val_mae: 0.124045 (0.127689 eV/atom) - val_r2: 0.9719
+Epoch 35/250 - train_mse: 0.037334 (0.039560 eV²/atom²) - val_mse: 0.027070 (0.028684 eV²/atom²) - val_mae: 0.122285 (0.125877 eV/atom) - val_r2: 0.9727
+Epoch 36/250 - train_mse: 0.036496 (0.038671 eV²/atom²) - val_mse: 0.026737 (0.028330 eV²/atom²) - val_mae: 0.121783 (0.125360 eV/atom) - val_r2: 0.9730
+Epoch 37/250 - train_mse: 0.035378 (0.037486 eV²/atom²) - val_mse: 0.026233 (0.027797 eV²/atom²) - val_mae: 0.120392 (0.123929 eV/atom) - val_r2: 0.9736
+Epoch 38/250 - train_mse: 0.035120 (0.037213 eV²/atom²) - val_mse: 0.025893 (0.027436 eV²/atom²) - val_mae: 0.119383 (0.122890 eV/atom) - val_r2: 0.9739
+Epoch 39/250 - train_mse: 0.034122 (0.036156 eV²/atom²) - val_mse: 0.025809 (0.027347 eV²/atom²) - val_mae: 0.118894 (0.122386 eV/atom) - val_r2: 0.9740
+Epoch 40/250 - train_mse: 0.033176 (0.035154 eV²/atom²) - val_mse: 0.025399 (0.026913 eV²/atom²) - val_mae: 0.117950 (0.121414 eV/atom) - val_r2: 0.9744
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_40.pt
+Epoch 41/250 - train_mse: 0.033957 (0.035981 eV²/atom²) - val_mse: 0.024782 (0.026259 eV²/atom²) - val_mae: 0.116692 (0.120119 eV/atom) - val_r2: 0.9750
+Epoch 42/250 - train_mse: 0.032723 (0.034674 eV²/atom²) - val_mse: 0.024453 (0.025910 eV²/atom²) - val_mae: 0.116071 (0.119480 eV/atom) - val_r2: 0.9753
+Epoch 43/250 - train_mse: 0.031995 (0.033902 eV²/atom²) - val_mse: 0.024364 (0.025816 eV²/atom²) - val_mae: 0.114830 (0.118203 eV/atom) - val_r2: 0.9754
+Epoch 44/250 - train_mse: 0.031534 (0.033413 eV²/atom²) - val_mse: 0.023943 (0.025370 eV²/atom²) - val_mae: 0.114052 (0.117402 eV/atom) - val_r2: 0.9759
+Epoch 45/250 - train_mse: 0.031183 (0.033042 eV²/atom²) - val_mse: 0.023631 (0.025039 eV²/atom²) - val_mae: 0.113671 (0.117010 eV/atom) - val_r2: 0.9762
+Epoch 46/250 - train_mse: 0.030373 (0.032184 eV²/atom²) - val_mse: 0.023473 (0.024872 eV²/atom²) - val_mae: 0.113166 (0.116490 eV/atom) - val_r2: 0.9763
+Epoch 47/250 - train_mse: 0.030446 (0.032261 eV²/atom²) - val_mse: 0.023185 (0.024567 eV²/atom²) - val_mae: 0.112365 (0.115666 eV/atom) - val_r2: 0.9766
+Epoch 48/250 - train_mse: 0.029602 (0.031367 eV²/atom²) - val_mse: 0.023252 (0.024638 eV²/atom²) - val_mae: 0.112535 (0.115840 eV/atom) - val_r2: 0.9766
+Epoch 49/250 - train_mse: 0.029497 (0.031256 eV²/atom²) - val_mse: 0.023280 (0.024668 eV²/atom²) - val_mae: 0.111708 (0.114989 eV/atom) - val_r2: 0.9765
+Epoch 50/250 - train_mse: 0.028905 (0.030628 eV²/atom²) - val_mse: 0.022767 (0.024124 eV²/atom²) - val_mae: 0.111473 (0.114747 eV/atom) - val_r2: 0.9770
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_50.pt
+Epoch 51/250 - train_mse: 0.028588 (0.030292 eV²/atom²) - val_mse: 0.022661 (0.024012 eV²/atom²) - val_mae: 0.110357 (0.113599 eV/atom) - val_r2: 0.9772
+Epoch 52/250 - train_mse: 0.028409 (0.030102 eV²/atom²) - val_mse: 0.022447 (0.023785 eV²/atom²) - val_mae: 0.109858 (0.113085 eV/atom) - val_r2: 0.9774
+Epoch 53/250 - train_mse: 0.028104 (0.029780 eV²/atom²) - val_mse: 0.022472 (0.023812 eV²/atom²) - val_mae: 0.109686 (0.112908 eV/atom) - val_r2: 0.9773
+Epoch 54/250 - train_mse: 0.027406 (0.029040 eV²/atom²) - val_mse: 0.022046 (0.023360 eV²/atom²) - val_mae: 0.109292 (0.112502 eV/atom) - val_r2: 0.9778
+Epoch 55/250 - train_mse: 0.027390 (0.029022 eV²/atom²) - val_mse: 0.022062 (0.023377 eV²/atom²) - val_mae: 0.109594 (0.112813 eV/atom) - val_r2: 0.9778
+Epoch 56/250 - train_mse: 0.027365 (0.028997 eV²/atom²) - val_mse: 0.021849 (0.023151 eV²/atom²) - val_mae: 0.109113 (0.112318 eV/atom) - val_r2: 0.9780
+Epoch 57/250 - train_mse: 0.026988 (0.028597 eV²/atom²) - val_mse: 0.021600 (0.022887 eV²/atom²) - val_mae: 0.108235 (0.111414 eV/atom) - val_r2: 0.9782
+Epoch 58/250 - train_mse: 0.026755 (0.028350 eV²/atom²) - val_mse: 0.021589 (0.022876 eV²/atom²) - val_mae: 0.107705 (0.110869 eV/atom) - val_r2: 0.9782
+Epoch 59/250 - train_mse: 0.026199 (0.027761 eV²/atom²) - val_mse: 0.021435 (0.022713 eV²/atom²) - val_mae: 0.107435 (0.110591 eV/atom) - val_r2: 0.9784
+Epoch 60/250 - train_mse: 0.026139 (0.027697 eV²/atom²) - val_mse: 0.021414 (0.022690 eV²/atom²) - val_mae: 0.107223 (0.110372 eV/atom) - val_r2: 0.9784
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_60.pt
+Epoch 61/250 - train_mse: 0.025370 (0.026882 eV²/atom²) - val_mse: 0.021318 (0.022589 eV²/atom²) - val_mae: 0.106940 (0.110081 eV/atom) - val_r2: 0.9785
+Epoch 62/250 - train_mse: 0.025798 (0.027335 eV²/atom²) - val_mse: 0.020928 (0.022176 eV²/atom²) - val_mae: 0.106109 (0.109226 eV/atom) - val_r2: 0.9789
+Epoch 63/250 - train_mse: 0.025478 (0.026997 eV²/atom²) - val_mse: 0.021061 (0.022317 eV²/atom²) - val_mae: 0.106401 (0.109526 eV/atom) - val_r2: 0.9788
+Epoch 64/250 - train_mse: 0.024990 (0.026479 eV²/atom²) - val_mse: 0.021146 (0.022407 eV²/atom²) - val_mae: 0.106223 (0.109343 eV/atom) - val_r2: 0.9787
+Epoch 65/250 - train_mse: 0.025169 (0.026670 eV²/atom²) - val_mse: 0.020925 (0.022172 eV²/atom²) - val_mae: 0.105458 (0.108556 eV/atom) - val_r2: 0.9789
+Epoch 66/250 - train_mse: 0.024951 (0.026438 eV²/atom²) - val_mse: 0.021084 (0.022341 eV²/atom²) - val_mae: 0.105544 (0.108644 eV/atom) - val_r2: 0.9787
+Epoch 67/250 - train_mse: 0.024914 (0.026399 eV²/atom²) - val_mse: 0.020728 (0.021963 eV²/atom²) - val_mae: 0.105143 (0.108232 eV/atom) - val_r2: 0.9791
+Epoch 68/250 - train_mse: 0.024529 (0.025991 eV²/atom²) - val_mse: 0.020864 (0.022107 eV²/atom²) - val_mae: 0.105098 (0.108185 eV/atom) - val_r2: 0.9790
+Epoch 69/250 - train_mse: 0.024172 (0.025613 eV²/atom²) - val_mse: 0.020594 (0.021822 eV²/atom²) - val_mae: 0.104897 (0.107978 eV/atom) - val_r2: 0.9792
+Epoch 70/250 - train_mse: 0.023952 (0.025380 eV²/atom²) - val_mse: 0.020511 (0.021734 eV²/atom²) - val_mae: 0.104515 (0.107585 eV/atom) - val_r2: 0.9793
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_70.pt
+Epoch 71/250 - train_mse: 0.024161 (0.025601 eV²/atom²) - val_mse: 0.020527 (0.021751 eV²/atom²) - val_mae: 0.104197 (0.107258 eV/atom) - val_r2: 0.9793
+Epoch 72/250 - train_mse: 0.024051 (0.025485 eV²/atom²) - val_mse: 0.020358 (0.021572 eV²/atom²) - val_mae: 0.104071 (0.107128 eV/atom) - val_r2: 0.9795
+Epoch 73/250 - train_mse: 0.023557 (0.024961 eV²/atom²) - val_mse: 0.020319 (0.021530 eV²/atom²) - val_mae: 0.103577 (0.106619 eV/atom) - val_r2: 0.9795
+Epoch 74/250 - train_mse: 0.023240 (0.024625 eV²/atom²) - val_mse: 0.020422 (0.021639 eV²/atom²) - val_mae: 0.103771 (0.106819 eV/atom) - val_r2: 0.9794
+Epoch 75/250 - train_mse: 0.023510 (0.024912 eV²/atom²) - val_mse: 0.020387 (0.021602 eV²/atom²) - val_mae: 0.104087 (0.107144 eV/atom) - val_r2: 0.9794
+Epoch 76/250 - train_mse: 0.023445 (0.024843 eV²/atom²) - val_mse: 0.020019 (0.021212 eV²/atom²) - val_mae: 0.102878 (0.105900 eV/atom) - val_r2: 0.9798
+Epoch 77/250 - train_mse: 0.023517 (0.024919 eV²/atom²) - val_mse: 0.020184 (0.021387 eV²/atom²) - val_mae: 0.102832 (0.105852 eV/atom) - val_r2: 0.9797
+Epoch 78/250 - train_mse: 0.023111 (0.024488 eV²/atom²) - val_mse: 0.019902 (0.021088 eV²/atom²) - val_mae: 0.102416 (0.105424 eV/atom) - val_r2: 0.9799
+Epoch 79/250 - train_mse: 0.022971 (0.024340 eV²/atom²) - val_mse: 0.019829 (0.021011 eV²/atom²) - val_mae: 0.102518 (0.105529 eV/atom) - val_r2: 0.9800
+Epoch 80/250 - train_mse: 0.022681 (0.024033 eV²/atom²) - val_mse: 0.019829 (0.021012 eV²/atom²) - val_mae: 0.101382 (0.104360 eV/atom) - val_r2: 0.9800
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_80.pt
+Epoch 81/250 - train_mse: 0.022702 (0.024055 eV²/atom²) - val_mse: 0.019797 (0.020977 eV²/atom²) - val_mae: 0.102295 (0.105300 eV/atom) - val_r2: 0.9800
+Epoch 82/250 - train_mse: 0.022698 (0.024051 eV²/atom²) - val_mse: 0.019592 (0.020760 eV²/atom²) - val_mae: 0.102441 (0.105450 eV/atom) - val_r2: 0.9802
+Epoch 83/250 - train_mse: 0.022383 (0.023717 eV²/atom²) - val_mse: 0.019660 (0.020832 eV²/atom²) - val_mae: 0.102248 (0.105252 eV/atom) - val_r2: 0.9802
+Epoch 84/250 - train_mse: 0.022421 (0.023758 eV²/atom²) - val_mse: 0.019673 (0.020846 eV²/atom²) - val_mae: 0.101770 (0.104760 eV/atom) - val_r2: 0.9802
+Epoch 85/250 - train_mse: 0.022288 (0.023616 eV²/atom²) - val_mse: 0.019666 (0.020838 eV²/atom²) - val_mae: 0.101791 (0.104781 eV/atom) - val_r2: 0.9802
+Epoch 86/250 - train_mse: 0.022460 (0.023799 eV²/atom²) - val_mse: 0.019690 (0.020864 eV²/atom²) - val_mae: 0.102135 (0.105135 eV/atom) - val_r2: 0.9802
+Epoch 87/250 - train_mse: 0.021982 (0.023293 eV²/atom²) - val_mse: 0.019376 (0.020531 eV²/atom²) - val_mae: 0.101059 (0.104027 eV/atom) - val_r2: 0.9805
+Epoch 88/250 - train_mse: 0.021966 (0.023276 eV²/atom²) - val_mse: 0.019577 (0.020744 eV²/atom²) - val_mae: 0.100971 (0.103937 eV/atom) - val_r2: 0.9803
+Epoch 89/250 - train_mse: 0.021677 (0.022969 eV²/atom²) - val_mse: 0.019166 (0.020309 eV²/atom²) - val_mae: 0.100252 (0.103197 eV/atom) - val_r2: 0.9807
+Epoch 90/250 - train_mse: 0.021825 (0.023126 eV²/atom²) - val_mse: 0.019200 (0.020345 eV²/atom²) - val_mae: 0.100806 (0.103767 eV/atom) - val_r2: 0.9806
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_90.pt
+Epoch 91/250 - train_mse: 0.021783 (0.023082 eV²/atom²) - val_mse: 0.019230 (0.020376 eV²/atom²) - val_mae: 0.100038 (0.102977 eV/atom) - val_r2: 0.9806
+Epoch 92/250 - train_mse: 0.021925 (0.023232 eV²/atom²) - val_mse: 0.019265 (0.020414 eV²/atom²) - val_mae: 0.100403 (0.103352 eV/atom) - val_r2: 0.9806
+Epoch 93/250 - train_mse: 0.021358 (0.022631 eV²/atom²) - val_mse: 0.019054 (0.020190 eV²/atom²) - val_mae: 0.100436 (0.103386 eV/atom) - val_r2: 0.9808
+Epoch 94/250 - train_mse: 0.021306 (0.022576 eV²/atom²) - val_mse: 0.019208 (0.020353 eV²/atom²) - val_mae: 0.100213 (0.103156 eV/atom) - val_r2: 0.9806
+Epoch 95/250 - train_mse: 0.021437 (0.022715 eV²/atom²) - val_mse: 0.019187 (0.020331 eV²/atom²) - val_mae: 0.100642 (0.103598 eV/atom) - val_r2: 0.9807
+Epoch 96/250 - train_mse: 0.021131 (0.022391 eV²/atom²) - val_mse: 0.019409 (0.020566 eV²/atom²) - val_mae: 0.100469 (0.103421 eV/atom) - val_r2: 0.9804
+Epoch 97/250 - train_mse: 0.021314 (0.022584 eV²/atom²) - val_mse: 0.018885 (0.020010 eV²/atom²) - val_mae: 0.099578 (0.102503 eV/atom) - val_r2: 0.9810
+Epoch 98/250 - train_mse: 0.021156 (0.022417 eV²/atom²) - val_mse: 0.019016 (0.020150 eV²/atom²) - val_mae: 0.099847 (0.102780 eV/atom) - val_r2: 0.9808
+Epoch 99/250 - train_mse: 0.020925 (0.022172 eV²/atom²) - val_mse: 0.019049 (0.020185 eV²/atom²) - val_mae: 0.099637 (0.102564 eV/atom) - val_r2: 0.9808
+Epoch 100/250 - train_mse: 0.021050 (0.022305 eV²/atom²) - val_mse: 0.018519 (0.019623 eV²/atom²) - val_mae: 0.098630 (0.101527 eV/atom) - val_r2: 0.9813
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_100.pt
+Epoch 101/250 - train_mse: 0.020939 (0.022187 eV²/atom²) - val_mse: 0.018969 (0.020100 eV²/atom²) - val_mae: 0.099847 (0.102780 eV/atom) - val_r2: 0.9809
+Epoch 102/250 - train_mse: 0.020812 (0.022052 eV²/atom²) - val_mse: 0.018895 (0.020022 eV²/atom²) - val_mae: 0.098882 (0.101786 eV/atom) - val_r2: 0.9810
+Epoch 103/250 - train_mse: 0.020807 (0.022047 eV²/atom²) - val_mse: 0.018431 (0.019530 eV²/atom²) - val_mae: 0.098568 (0.101463 eV/atom) - val_r2: 0.9814
+Epoch 104/250 - train_mse: 0.020654 (0.021885 eV²/atom²) - val_mse: 0.018593 (0.019701 eV²/atom²) - val_mae: 0.098687 (0.101586 eV/atom) - val_r2: 0.9813
+Epoch 105/250 - train_mse: 0.020371 (0.021585 eV²/atom²) - val_mse: 0.018990 (0.020122 eV²/atom²) - val_mae: 0.099478 (0.102401 eV/atom) - val_r2: 0.9809
+Epoch 106/250 - train_mse: 0.020264 (0.021472 eV²/atom²) - val_mse: 0.018628 (0.019738 eV²/atom²) - val_mae: 0.098725 (0.101625 eV/atom) - val_r2: 0.9812
+Epoch 107/250 - train_mse: 0.020536 (0.021761 eV²/atom²) - val_mse: 0.018526 (0.019631 eV²/atom²) - val_mae: 0.098909 (0.101814 eV/atom) - val_r2: 0.9813
+Epoch 108/250 - train_mse: 0.020608 (0.021837 eV²/atom²) - val_mse: 0.018476 (0.019577 eV²/atom²) - val_mae: 0.098551 (0.101445 eV/atom) - val_r2: 0.9814
+Epoch 109/250 - train_mse: 0.020265 (0.021473 eV²/atom²) - val_mse: 0.018599 (0.019707 eV²/atom²) - val_mae: 0.098042 (0.100922 eV/atom) - val_r2: 0.9813
+Epoch 110/250 - train_mse: 0.020316 (0.021527 eV²/atom²) - val_mse: 0.018526 (0.019630 eV²/atom²) - val_mae: 0.098793 (0.101695 eV/atom) - val_r2: 0.9813
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_110.pt
+Epoch 111/250 - train_mse: 0.020179 (0.021382 eV²/atom²) - val_mse: 0.018305 (0.019396 eV²/atom²) - val_mae: 0.097812 (0.100685 eV/atom) - val_r2: 0.9815
+Epoch 112/250 - train_mse: 0.020119 (0.021319 eV²/atom²) - val_mse: 0.018397 (0.019494 eV²/atom²) - val_mae: 0.097961 (0.100839 eV/atom) - val_r2: 0.9815
+Epoch 113/250 - train_mse: 0.019889 (0.021074 eV²/atom²) - val_mse: 0.018357 (0.019451 eV²/atom²) - val_mae: 0.098204 (0.101088 eV/atom) - val_r2: 0.9815
+Epoch 114/250 - train_mse: 0.019756 (0.020934 eV²/atom²) - val_mse: 0.018474 (0.019575 eV²/atom²) - val_mae: 0.097837 (0.100711 eV/atom) - val_r2: 0.9814
+Epoch 115/250 - train_mse: 0.019915 (0.021102 eV²/atom²) - val_mse: 0.018295 (0.019385 eV²/atom²) - val_mae: 0.098658 (0.101556 eV/atom) - val_r2: 0.9816
+Epoch 116/250 - train_mse: 0.019995 (0.021187 eV²/atom²) - val_mse: 0.018089 (0.019168 eV²/atom²) - val_mae: 0.097588 (0.100454 eV/atom) - val_r2: 0.9818
+Epoch 117/250 - train_mse: 0.019761 (0.020939 eV²/atom²) - val_mse: 0.018172 (0.019255 eV²/atom²) - val_mae: 0.097457 (0.100320 eV/atom) - val_r2: 0.9817
+Epoch 118/250 - train_mse: 0.019967 (0.021157 eV²/atom²) - val_mse: 0.018507 (0.019611 eV²/atom²) - val_mae: 0.098263 (0.101150 eV/atom) - val_r2: 0.9813
+Epoch 119/250 - train_mse: 0.019884 (0.021070 eV²/atom²) - val_mse: 0.018296 (0.019387 eV²/atom²) - val_mae: 0.097609 (0.100477 eV/atom) - val_r2: 0.9816
+Epoch 120/250 - train_mse: 0.019802 (0.020983 eV²/atom²) - val_mse: 0.017880 (0.018946 eV²/atom²) - val_mae: 0.096681 (0.099521 eV/atom) - val_r2: 0.9820
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_120.pt
+Epoch 121/250 - train_mse: 0.019456 (0.020615 eV²/atom²) - val_mse: 0.018062 (0.019138 eV²/atom²) - val_mae: 0.097234 (0.100090 eV/atom) - val_r2: 0.9818
+Epoch 122/250 - train_mse: 0.019610 (0.020779 eV²/atom²) - val_mse: 0.018035 (0.019110 eV²/atom²) - val_mae: 0.097335 (0.100194 eV/atom) - val_r2: 0.9818
+Epoch 123/250 - train_mse: 0.019451 (0.020611 eV²/atom²) - val_mse: 0.018004 (0.019077 eV²/atom²) - val_mae: 0.096944 (0.099792 eV/atom) - val_r2: 0.9819
+Epoch 124/250 - train_mse: 0.019655 (0.020827 eV²/atom²) - val_mse: 0.018251 (0.019339 eV²/atom²) - val_mae: 0.097458 (0.100320 eV/atom) - val_r2: 0.9816
+Epoch 125/250 - train_mse: 0.019505 (0.020668 eV²/atom²) - val_mse: 0.018014 (0.019088 eV²/atom²) - val_mae: 0.097016 (0.099865 eV/atom) - val_r2: 0.9818
+Epoch 126/250 - train_mse: 0.019401 (0.020558 eV²/atom²) - val_mse: 0.017751 (0.018809 eV²/atom²) - val_mae: 0.096673 (0.099512 eV/atom) - val_r2: 0.9821
+Epoch 127/250 - train_mse: 0.019176 (0.020319 eV²/atom²) - val_mse: 0.018066 (0.019143 eV²/atom²) - val_mae: 0.096782 (0.099625 eV/atom) - val_r2: 0.9818
+Epoch 128/250 - train_mse: 0.019175 (0.020318 eV²/atom²) - val_mse: 0.018118 (0.019198 eV²/atom²) - val_mae: 0.096551 (0.099387 eV/atom) - val_r2: 0.9817
+Epoch 129/250 - train_mse: 0.019224 (0.020370 eV²/atom²) - val_mse: 0.017939 (0.019009 eV²/atom²) - val_mae: 0.097196 (0.100051 eV/atom) - val_r2: 0.9819
+Epoch 130/250 - train_mse: 0.019252 (0.020400 eV²/atom²) - val_mse: 0.018145 (0.019227 eV²/atom²) - val_mae: 0.097340 (0.100199 eV/atom) - val_r2: 0.9817
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_130.pt
+Epoch 131/250 - train_mse: 0.019304 (0.020455 eV²/atom²) - val_mse: 0.017684 (0.018738 eV²/atom²) - val_mae: 0.096302 (0.099131 eV/atom) - val_r2: 0.9822
+Epoch 132/250 - train_mse: 0.018916 (0.020044 eV²/atom²) - val_mse: 0.017936 (0.019005 eV²/atom²) - val_mae: 0.096230 (0.099057 eV/atom) - val_r2: 0.9819
+Epoch 133/250 - train_mse: 0.018793 (0.019913 eV²/atom²) - val_mse: 0.017668 (0.018721 eV²/atom²) - val_mae: 0.096019 (0.098840 eV/atom) - val_r2: 0.9822
+Epoch 134/250 - train_mse: 0.018992 (0.020124 eV²/atom²) - val_mse: 0.017549 (0.018596 eV²/atom²) - val_mae: 0.095771 (0.098585 eV/atom) - val_r2: 0.9823
+Epoch 135/250 - train_mse: 0.018960 (0.020090 eV²/atom²) - val_mse: 0.017539 (0.018584 eV²/atom²) - val_mae: 0.095695 (0.098506 eV/atom) - val_r2: 0.9823
+Epoch 136/250 - train_mse: 0.018950 (0.020080 eV²/atom²) - val_mse: 0.017443 (0.018483 eV²/atom²) - val_mae: 0.095849 (0.098664 eV/atom) - val_r2: 0.9824
+Epoch 137/250 - train_mse: 0.018620 (0.019730 eV²/atom²) - val_mse: 0.017325 (0.018358 eV²/atom²) - val_mae: 0.095639 (0.098449 eV/atom) - val_r2: 0.9825
+Epoch 138/250 - train_mse: 0.018839 (0.019962 eV²/atom²) - val_mse: 0.017584 (0.018632 eV²/atom²) - val_mae: 0.095661 (0.098470 eV/atom) - val_r2: 0.9823
+Epoch 139/250 - train_mse: 0.018873 (0.019998 eV²/atom²) - val_mse: 0.017506 (0.018550 eV²/atom²) - val_mae: 0.095428 (0.098231 eV/atom) - val_r2: 0.9824
+Epoch 140/250 - train_mse: 0.018783 (0.019902 eV²/atom²) - val_mse: 0.017420 (0.018459 eV²/atom²) - val_mae: 0.095875 (0.098691 eV/atom) - val_r2: 0.9824
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_140.pt
+Epoch 141/250 - train_mse: 0.018746 (0.019864 eV²/atom²) - val_mse: 0.017769 (0.018828 eV²/atom²) - val_mae: 0.095832 (0.098647 eV/atom) - val_r2: 0.9821
+Epoch 142/250 - train_mse: 0.018519 (0.019623 eV²/atom²) - val_mse: 0.017400 (0.018437 eV²/atom²) - val_mae: 0.095068 (0.097861 eV/atom) - val_r2: 0.9825
+Epoch 143/250 - train_mse: 0.018632 (0.019743 eV²/atom²) - val_mse: 0.017512 (0.018555 eV²/atom²) - val_mae: 0.095808 (0.098623 eV/atom) - val_r2: 0.9823
+Epoch 144/250 - train_mse: 0.018269 (0.019358 eV²/atom²) - val_mse: 0.017178 (0.018202 eV²/atom²) - val_mae: 0.095241 (0.098038 eV/atom) - val_r2: 0.9827
+Epoch 145/250 - train_mse: 0.018518 (0.019621 eV²/atom²) - val_mse: 0.017198 (0.018223 eV²/atom²) - val_mae: 0.094693 (0.097474 eV/atom) - val_r2: 0.9827
+Epoch 146/250 - train_mse: 0.018545 (0.019651 eV²/atom²) - val_mse: 0.017396 (0.018433 eV²/atom²) - val_mae: 0.095463 (0.098267 eV/atom) - val_r2: 0.9825
+Epoch 147/250 - train_mse: 0.018281 (0.019371 eV²/atom²) - val_mse: 0.017368 (0.018403 eV²/atom²) - val_mae: 0.095474 (0.098278 eV/atom) - val_r2: 0.9825
+Epoch 148/250 - train_mse: 0.018354 (0.019448 eV²/atom²) - val_mse: 0.017153 (0.018175 eV²/atom²) - val_mae: 0.095103 (0.097896 eV/atom) - val_r2: 0.9827
+Epoch 149/250 - train_mse: 0.018290 (0.019380 eV²/atom²) - val_mse: 0.017202 (0.018228 eV²/atom²) - val_mae: 0.094695 (0.097477 eV/atom) - val_r2: 0.9827
+Epoch 150/250 - train_mse: 0.018266 (0.019355 eV²/atom²) - val_mse: 0.017141 (0.018163 eV²/atom²) - val_mae: 0.094751 (0.097534 eV/atom) - val_r2: 0.9827
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_150.pt
+Epoch 151/250 - train_mse: 0.018279 (0.019369 eV²/atom²) - val_mse: 0.017106 (0.018125 eV²/atom²) - val_mae: 0.094775 (0.097559 eV/atom) - val_r2: 0.9828
+Epoch 152/250 - train_mse: 0.018080 (0.019158 eV²/atom²) - val_mse: 0.016731 (0.017729 eV²/atom²) - val_mae: 0.093624 (0.096374 eV/atom) - val_r2: 0.9831
+Epoch 153/250 - train_mse: 0.018037 (0.019112 eV²/atom²) - val_mse: 0.017331 (0.018364 eV²/atom²) - val_mae: 0.095169 (0.097965 eV/atom) - val_r2: 0.9825
+Epoch 154/250 - train_mse: 0.018156 (0.019238 eV²/atom²) - val_mse: 0.017117 (0.018137 eV²/atom²) - val_mae: 0.094246 (0.097014 eV/atom) - val_r2: 0.9827
+Epoch 155/250 - train_mse: 0.017938 (0.019008 eV²/atom²) - val_mse: 0.016874 (0.017880 eV²/atom²) - val_mae: 0.093855 (0.096612 eV/atom) - val_r2: 0.9830
+Epoch 156/250 - train_mse: 0.018122 (0.019203 eV²/atom²) - val_mse: 0.017188 (0.018213 eV²/atom²) - val_mae: 0.094740 (0.097523 eV/atom) - val_r2: 0.9827
+Epoch 157/250 - train_mse: 0.018056 (0.019132 eV²/atom²) - val_mse: 0.017138 (0.018160 eV²/atom²) - val_mae: 0.094745 (0.097528 eV/atom) - val_r2: 0.9827
+Epoch 158/250 - train_mse: 0.018152 (0.019234 eV²/atom²) - val_mse: 0.017022 (0.018037 eV²/atom²) - val_mae: 0.094065 (0.096828 eV/atom) - val_r2: 0.9828
+Epoch 159/250 - train_mse: 0.018138 (0.019219 eV²/atom²) - val_mse: 0.016923 (0.017932 eV²/atom²) - val_mae: 0.094010 (0.096771 eV/atom) - val_r2: 0.9829
+Epoch 160/250 - train_mse: 0.017706 (0.018762 eV²/atom²) - val_mse: 0.017181 (0.018206 eV²/atom²) - val_mae: 0.094970 (0.097759 eV/atom) - val_r2: 0.9827
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_160.pt
+Epoch 161/250 - train_mse: 0.017825 (0.018888 eV²/atom²) - val_mse: 0.017055 (0.018071 eV²/atom²) - val_mae: 0.094342 (0.097113 eV/atom) - val_r2: 0.9828
+Epoch 162/250 - train_mse: 0.017903 (0.018970 eV²/atom²) - val_mse: 0.016954 (0.017965 eV²/atom²) - val_mae: 0.094110 (0.096874 eV/atom) - val_r2: 0.9829
+Epoch 163/250 - train_mse: 0.017776 (0.018835 eV²/atom²) - val_mse: 0.017077 (0.018095 eV²/atom²) - val_mae: 0.094615 (0.097394 eV/atom) - val_r2: 0.9828
+Epoch 164/250 - train_mse: 0.017762 (0.018821 eV²/atom²) - val_mse: 0.016723 (0.017720 eV²/atom²) - val_mae: 0.093740 (0.096494 eV/atom) - val_r2: 0.9831
+Epoch 165/250 - train_mse: 0.017681 (0.018734 eV²/atom²) - val_mse: 0.016678 (0.017672 eV²/atom²) - val_mae: 0.093068 (0.095801 eV/atom) - val_r2: 0.9832
+Epoch 166/250 - train_mse: 0.017717 (0.018774 eV²/atom²) - val_mse: 0.016886 (0.017893 eV²/atom²) - val_mae: 0.094108 (0.096872 eV/atom) - val_r2: 0.9830
+Epoch 167/250 - train_mse: 0.017640 (0.018691 eV²/atom²) - val_mse: 0.016937 (0.017947 eV²/atom²) - val_mae: 0.094040 (0.096803 eV/atom) - val_r2: 0.9829
+Epoch 168/250 - train_mse: 0.017877 (0.018942 eV²/atom²) - val_mse: 0.016810 (0.017813 eV²/atom²) - val_mae: 0.093772 (0.096526 eV/atom) - val_r2: 0.9831
+Epoch 169/250 - train_mse: 0.017529 (0.018574 eV²/atom²) - val_mse: 0.016671 (0.017665 eV²/atom²) - val_mae: 0.093588 (0.096337 eV/atom) - val_r2: 0.9832
+Epoch 170/250 - train_mse: 0.017576 (0.018624 eV²/atom²) - val_mse: 0.016733 (0.017730 eV²/atom²) - val_mae: 0.093668 (0.096420 eV/atom) - val_r2: 0.9831
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_170.pt
+Epoch 171/250 - train_mse: 0.017785 (0.018845 eV²/atom²) - val_mse: 0.016529 (0.017515 eV²/atom²) - val_mae: 0.092964 (0.095695 eV/atom) - val_r2: 0.9833
+Epoch 172/250 - train_mse: 0.017507 (0.018551 eV²/atom²) - val_mse: 0.016505 (0.017489 eV²/atom²) - val_mae: 0.093297 (0.096038 eV/atom) - val_r2: 0.9834
+Epoch 173/250 - train_mse: 0.017603 (0.018652 eV²/atom²) - val_mse: 0.016877 (0.017883 eV²/atom²) - val_mae: 0.093261 (0.096001 eV/atom) - val_r2: 0.9830
+Epoch 174/250 - train_mse: 0.017523 (0.018568 eV²/atom²) - val_mse: 0.016934 (0.017943 eV²/atom²) - val_mae: 0.093872 (0.096629 eV/atom) - val_r2: 0.9829
+Epoch 175/250 - train_mse: 0.017339 (0.018372 eV²/atom²) - val_mse: 0.016467 (0.017448 eV²/atom²) - val_mae: 0.092915 (0.095645 eV/atom) - val_r2: 0.9834
+Epoch 176/250 - train_mse: 0.017661 (0.018714 eV²/atom²) - val_mse: 0.016691 (0.017686 eV²/atom²) - val_mae: 0.093084 (0.095819 eV/atom) - val_r2: 0.9832
+Epoch 177/250 - train_mse: 0.017434 (0.018473 eV²/atom²) - val_mse: 0.016470 (0.017452 eV²/atom²) - val_mae: 0.092629 (0.095350 eV/atom) - val_r2: 0.9834
+Epoch 178/250 - train_mse: 0.017196 (0.018221 eV²/atom²) - val_mse: 0.016412 (0.017390 eV²/atom²) - val_mae: 0.092036 (0.094739 eV/atom) - val_r2: 0.9835
+Epoch 179/250 - train_mse: 0.017089 (0.018108 eV²/atom²) - val_mse: 0.016492 (0.017475 eV²/atom²) - val_mae: 0.092684 (0.095406 eV/atom) - val_r2: 0.9834
+Epoch 180/250 - train_mse: 0.017242 (0.018270 eV²/atom²) - val_mse: 0.016422 (0.017401 eV²/atom²) - val_mae: 0.092854 (0.095582 eV/atom) - val_r2: 0.9834
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_180.pt
+Epoch 181/250 - train_mse: 0.017422 (0.018461 eV²/atom²) - val_mse: 0.016515 (0.017500 eV²/atom²) - val_mae: 0.093081 (0.095815 eV/atom) - val_r2: 0.9834
+Epoch 182/250 - train_mse: 0.017007 (0.018021 eV²/atom²) - val_mse: 0.016686 (0.017681 eV²/atom²) - val_mae: 0.093380 (0.096123 eV/atom) - val_r2: 0.9832
+Epoch 183/250 - train_mse: 0.017316 (0.018348 eV²/atom²) - val_mse: 0.016669 (0.017662 eV²/atom²) - val_mae: 0.092758 (0.095482 eV/atom) - val_r2: 0.9832
+Epoch 184/250 - train_mse: 0.017157 (0.018180 eV²/atom²) - val_mse: 0.016234 (0.017202 eV²/atom²) - val_mae: 0.092023 (0.094726 eV/atom) - val_r2: 0.9836
+Epoch 185/250 - train_mse: 0.016993 (0.018006 eV²/atom²) - val_mse: 0.016169 (0.017133 eV²/atom²) - val_mae: 0.091803 (0.094499 eV/atom) - val_r2: 0.9837
+Epoch 186/250 - train_mse: 0.017289 (0.018319 eV²/atom²) - val_mse: 0.016588 (0.017577 eV²/atom²) - val_mae: 0.092720 (0.095444 eV/atom) - val_r2: 0.9833
+Epoch 187/250 - train_mse: 0.017331 (0.018364 eV²/atom²) - val_mse: 0.016508 (0.017492 eV²/atom²) - val_mae: 0.092296 (0.095007 eV/atom) - val_r2: 0.9834
+Epoch 188/250 - train_mse: 0.016988 (0.018000 eV²/atom²) - val_mse: 0.016354 (0.017329 eV²/atom²) - val_mae: 0.092609 (0.095330 eV/atom) - val_r2: 0.9835
+Epoch 189/250 - train_mse: 0.017128 (0.018149 eV²/atom²) - val_mse: 0.016297 (0.017268 eV²/atom²) - val_mae: 0.091993 (0.094695 eV/atom) - val_r2: 0.9836
+Epoch 190/250 - train_mse: 0.017149 (0.018171 eV²/atom²) - val_mse: 0.016192 (0.017157 eV²/atom²) - val_mae: 0.092349 (0.095061 eV/atom) - val_r2: 0.9837
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_190.pt
+Epoch 191/250 - train_mse: 0.016878 (0.017884 eV²/atom²) - val_mse: 0.016179 (0.017143 eV²/atom²) - val_mae: 0.092075 (0.094780 eV/atom) - val_r2: 0.9837
+Epoch 192/250 - train_mse: 0.017048 (0.018065 eV²/atom²) - val_mse: 0.016418 (0.017397 eV²/atom²) - val_mae: 0.092987 (0.095718 eV/atom) - val_r2: 0.9834
+Epoch 193/250 - train_mse: 0.016891 (0.017898 eV²/atom²) - val_mse: 0.016637 (0.017629 eV²/atom²) - val_mae: 0.092785 (0.095511 eV/atom) - val_r2: 0.9832
+Epoch 194/250 - train_mse: 0.016686 (0.017681 eV²/atom²) - val_mse: 0.016435 (0.017414 eV²/atom²) - val_mae: 0.092302 (0.095013 eV/atom) - val_r2: 0.9834
+Epoch 195/250 - train_mse: 0.016799 (0.017801 eV²/atom²) - val_mse: 0.016491 (0.017474 eV²/atom²) - val_mae: 0.091876 (0.094575 eV/atom) - val_r2: 0.9834
+Epoch 196/250 - train_mse: 0.016789 (0.017790 eV²/atom²) - val_mse: 0.016317 (0.017290 eV²/atom²) - val_mae: 0.092283 (0.094994 eV/atom) - val_r2: 0.9836
+Epoch 197/250 - train_mse: 0.016802 (0.017803 eV²/atom²) - val_mse: 0.016411 (0.017390 eV²/atom²) - val_mae: 0.092287 (0.094997 eV/atom) - val_r2: 0.9835
+Epoch 198/250 - train_mse: 0.016979 (0.017992 eV²/atom²) - val_mse: 0.016259 (0.017228 eV²/atom²) - val_mae: 0.091998 (0.094701 eV/atom) - val_r2: 0.9836
+Epoch 199/250 - train_mse: 0.016738 (0.017736 eV²/atom²) - val_mse: 0.016055 (0.017012 eV²/atom²) - val_mae: 0.091643 (0.094335 eV/atom) - val_r2: 0.9838
+Epoch 200/250 - train_mse: 0.016794 (0.017796 eV²/atom²) - val_mse: 0.016178 (0.017143 eV²/atom²) - val_mae: 0.091584 (0.094274 eV/atom) - val_r2: 0.9837
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_200.pt
+Epoch 201/250 - train_mse: 0.016607 (0.017597 eV²/atom²) - val_mse: 0.015923 (0.016872 eV²/atom²) - val_mae: 0.090975 (0.093647 eV/atom) - val_r2: 0.9839
+Epoch 202/250 - train_mse: 0.016506 (0.017490 eV²/atom²) - val_mse: 0.016300 (0.017272 eV²/atom²) - val_mae: 0.092052 (0.094756 eV/atom) - val_r2: 0.9836
+Epoch 203/250 - train_mse: 0.016750 (0.017749 eV²/atom²) - val_mse: 0.015990 (0.016944 eV²/atom²) - val_mae: 0.091228 (0.093908 eV/atom) - val_r2: 0.9839
+Epoch 204/250 - train_mse: 0.016805 (0.017807 eV²/atom²) - val_mse: 0.016245 (0.017213 eV²/atom²) - val_mae: 0.091924 (0.094624 eV/atom) - val_r2: 0.9836
+Epoch 205/250 - train_mse: 0.016642 (0.017634 eV²/atom²) - val_mse: 0.016025 (0.016980 eV²/atom²) - val_mae: 0.091477 (0.094164 eV/atom) - val_r2: 0.9838
+Epoch 206/250 - train_mse: 0.016749 (0.017748 eV²/atom²) - val_mse: 0.016109 (0.017069 eV²/atom²) - val_mae: 0.091381 (0.094065 eV/atom) - val_r2: 0.9838
+Epoch 207/250 - train_mse: 0.016751 (0.017750 eV²/atom²) - val_mse: 0.015908 (0.016856 eV²/atom²) - val_mae: 0.091873 (0.094572 eV/atom) - val_r2: 0.9840
+Epoch 208/250 - train_mse: 0.016555 (0.017542 eV²/atom²) - val_mse: 0.016139 (0.017101 eV²/atom²) - val_mae: 0.091339 (0.094022 eV/atom) - val_r2: 0.9837
+Epoch 209/250 - train_mse: 0.016540 (0.017526 eV²/atom²) - val_mse: 0.016227 (0.017194 eV²/atom²) - val_mae: 0.091673 (0.094366 eV/atom) - val_r2: 0.9836
+Epoch 210/250 - train_mse: 0.016548 (0.017534 eV²/atom²) - val_mse: 0.015923 (0.016872 eV²/atom²) - val_mae: 0.091184 (0.093862 eV/atom) - val_r2: 0.9839
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_210.pt
+Epoch 211/250 - train_mse: 0.016396 (0.017374 eV²/atom²) - val_mse: 0.016286 (0.017257 eV²/atom²) - val_mae: 0.091595 (0.094285 eV/atom) - val_r2: 0.9836
+Epoch 212/250 - train_mse: 0.016557 (0.017544 eV²/atom²) - val_mse: 0.016134 (0.017096 eV²/atom²) - val_mae: 0.091504 (0.094192 eV/atom) - val_r2: 0.9837
+Epoch 213/250 - train_mse: 0.016684 (0.017679 eV²/atom²) - val_mse: 0.016136 (0.017098 eV²/atom²) - val_mae: 0.091712 (0.094406 eV/atom) - val_r2: 0.9837
+Epoch 214/250 - train_mse: 0.016476 (0.017458 eV²/atom²) - val_mse: 0.016230 (0.017198 eV²/atom²) - val_mae: 0.091561 (0.094250 eV/atom) - val_r2: 0.9836
+Epoch 215/250 - train_mse: 0.016383 (0.017359 eV²/atom²) - val_mse: 0.016028 (0.016984 eV²/atom²) - val_mae: 0.091593 (0.094283 eV/atom) - val_r2: 0.9838
+Epoch 216/250 - train_mse: 0.016633 (0.017625 eV²/atom²) - val_mse: 0.016144 (0.017106 eV²/atom²) - val_mae: 0.091384 (0.094068 eV/atom) - val_r2: 0.9837
+Epoch 217/250 - train_mse: 0.016137 (0.017099 eV²/atom²) - val_mse: 0.015888 (0.016835 eV²/atom²) - val_mae: 0.091036 (0.093710 eV/atom) - val_r2: 0.9840
+Epoch 218/250 - train_mse: 0.016319 (0.017292 eV²/atom²) - val_mse: 0.015784 (0.016725 eV²/atom²) - val_mae: 0.091033 (0.093707 eV/atom) - val_r2: 0.9841
+Epoch 219/250 - train_mse: 0.016451 (0.017431 eV²/atom²) - val_mse: 0.016090 (0.017050 eV²/atom²) - val_mae: 0.091357 (0.094041 eV/atom) - val_r2: 0.9838
+Epoch 220/250 - train_mse: 0.016427 (0.017406 eV²/atom²) - val_mse: 0.015999 (0.016953 eV²/atom²) - val_mae: 0.090804 (0.093471 eV/atom) - val_r2: 0.9839
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_220.pt
+Epoch 221/250 - train_mse: 0.016270 (0.017240 eV²/atom²) - val_mse: 0.015987 (0.016940 eV²/atom²) - val_mae: 0.090686 (0.093349 eV/atom) - val_r2: 0.9839
+Epoch 222/250 - train_mse: 0.016621 (0.017612 eV²/atom²) - val_mse: 0.016068 (0.017026 eV²/atom²) - val_mae: 0.090493 (0.093151 eV/atom) - val_r2: 0.9838
+Epoch 223/250 - train_mse: 0.016165 (0.017129 eV²/atom²) - val_mse: 0.016000 (0.016954 eV²/atom²) - val_mae: 0.090768 (0.093434 eV/atom) - val_r2: 0.9839
+Epoch 224/250 - train_mse: 0.016437 (0.017417 eV²/atom²) - val_mse: 0.015836 (0.016780 eV²/atom²) - val_mae: 0.090847 (0.093516 eV/atom) - val_r2: 0.9840
+Epoch 225/250 - train_mse: 0.016372 (0.017348 eV²/atom²) - val_mse: 0.015782 (0.016723 eV²/atom²) - val_mae: 0.090331 (0.092984 eV/atom) - val_r2: 0.9841
+Epoch 226/250 - train_mse: 0.016291 (0.017262 eV²/atom²) - val_mse: 0.015950 (0.016901 eV²/atom²) - val_mae: 0.090484 (0.093142 eV/atom) - val_r2: 0.9839
+Epoch 227/250 - train_mse: 0.016259 (0.017228 eV²/atom²) - val_mse: 0.015765 (0.016705 eV²/atom²) - val_mae: 0.090236 (0.092886 eV/atom) - val_r2: 0.9841
+Epoch 228/250 - train_mse: 0.016354 (0.017329 eV²/atom²) - val_mse: 0.015963 (0.016915 eV²/atom²) - val_mae: 0.090647 (0.093310 eV/atom) - val_r2: 0.9839
+Epoch 229/250 - train_mse: 0.015982 (0.016934 eV²/atom²) - val_mse: 0.015752 (0.016691 eV²/atom²) - val_mae: 0.090495 (0.093154 eV/atom) - val_r2: 0.9841
+Epoch 230/250 - train_mse: 0.016100 (0.017060 eV²/atom²) - val_mse: 0.015885 (0.016832 eV²/atom²) - val_mae: 0.090766 (0.093432 eV/atom) - val_r2: 0.9840
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_230.pt
+Epoch 231/250 - train_mse: 0.016235 (0.017202 eV²/atom²) - val_mse: 0.015983 (0.016936 eV²/atom²) - val_mae: 0.090171 (0.092820 eV/atom) - val_r2: 0.9839
+Epoch 232/250 - train_mse: 0.016440 (0.017420 eV²/atom²) - val_mse: 0.015606 (0.016536 eV²/atom²) - val_mae: 0.090366 (0.093020 eV/atom) - val_r2: 0.9843
+Epoch 233/250 - train_mse: 0.016174 (0.017138 eV²/atom²) - val_mse: 0.015880 (0.016827 eV²/atom²) - val_mae: 0.090314 (0.092967 eV/atom) - val_r2: 0.9840
+Epoch 234/250 - train_mse: 0.016006 (0.016961 eV²/atom²) - val_mse: 0.015989 (0.016943 eV²/atom²) - val_mae: 0.090317 (0.092970 eV/atom) - val_r2: 0.9839
+Epoch 235/250 - train_mse: 0.016243 (0.017212 eV²/atom²) - val_mse: 0.015535 (0.016461 eV²/atom²) - val_mae: 0.090121 (0.092768 eV/atom) - val_r2: 0.9843
+Epoch 236/250 - train_mse: 0.016100 (0.017060 eV²/atom²) - val_mse: 0.015687 (0.016622 eV²/atom²) - val_mae: 0.090258 (0.092909 eV/atom) - val_r2: 0.9842
+Epoch 237/250 - train_mse: 0.016011 (0.016966 eV²/atom²) - val_mse: 0.015843 (0.016787 eV²/atom²) - val_mae: 0.090356 (0.093010 eV/atom) - val_r2: 0.9840
+Epoch 238/250 - train_mse: 0.015908 (0.016856 eV²/atom²) - val_mse: 0.015579 (0.016507 eV²/atom²) - val_mae: 0.090138 (0.092786 eV/atom) - val_r2: 0.9843
+Epoch 239/250 - train_mse: 0.016011 (0.016965 eV²/atom²) - val_mse: 0.015861 (0.016806 eV²/atom²) - val_mae: 0.090864 (0.093533 eV/atom) - val_r2: 0.9840
+Epoch 240/250 - train_mse: 0.015935 (0.016885 eV²/atom²) - val_mse: 0.015789 (0.016731 eV²/atom²) - val_mae: 0.090251 (0.092902 eV/atom) - val_r2: 0.9841
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_240.pt
+Epoch 241/250 - train_mse: 0.016036 (0.016992 eV²/atom²) - val_mse: 0.015503 (0.016427 eV²/atom²) - val_mae: 0.090094 (0.092740 eV/atom) - val_r2: 0.9844
+Epoch 242/250 - train_mse: 0.016040 (0.016996 eV²/atom²) - val_mse: 0.015427 (0.016346 eV²/atom²) - val_mae: 0.089886 (0.092526 eV/atom) - val_r2: 0.9844
+Epoch 243/250 - train_mse: 0.016148 (0.017110 eV²/atom²) - val_mse: 0.015586 (0.016516 eV²/atom²) - val_mae: 0.089417 (0.092043 eV/atom) - val_r2: 0.9843
+Epoch 244/250 - train_mse: 0.015933 (0.016882 eV²/atom²) - val_mse: 0.015637 (0.016569 eV²/atom²) - val_mae: 0.090249 (0.092899 eV/atom) - val_r2: 0.9842
+Epoch 245/250 - train_mse: 0.015855 (0.016800 eV²/atom²) - val_mse: 0.015464 (0.016386 eV²/atom²) - val_mae: 0.089712 (0.092347 eV/atom) - val_r2: 0.9844
+Epoch 246/250 - train_mse: 0.015912 (0.016860 eV²/atom²) - val_mse: 0.015417 (0.016336 eV²/atom²) - val_mae: 0.089765 (0.092401 eV/atom) - val_r2: 0.9845
+Epoch 247/250 - train_mse: 0.015804 (0.016746 eV²/atom²) - val_mse: 0.015448 (0.016369 eV²/atom²) - val_mae: 0.089414 (0.092041 eV/atom) - val_r2: 0.9844
+Epoch 248/250 - train_mse: 0.015766 (0.016706 eV²/atom²) - val_mse: 0.015500 (0.016424 eV²/atom²) - val_mae: 0.089211 (0.091831 eV/atom) - val_r2: 0.9844
+Epoch 249/250 - train_mse: 0.015871 (0.016818 eV²/atom²) - val_mse: 0.015468 (0.016390 eV²/atom²) - val_mae: 0.089495 (0.092123 eV/atom) - val_r2: 0.9844
+Epoch 250/250 - train_mse: 0.016007 (0.016961 eV²/atom²) - val_mse: 0.015786 (0.016727 eV²/atom²) - val_mae: 0.090169 (0.092818 eV/atom) - val_r2: 0.9841
+Saved checkpoint: checkpoints/2026-04-20_15-29-54/model_250.pt
+Test - test_mse: 0.015416 (0.016334 eV²/atom²) - test_mae: 0.090117 (0.092764 eV/atom) - test_r2: 0.9845

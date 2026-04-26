@@ -126,6 +126,17 @@ def evaluate_baseline(model, test_data, target_mean=None, target_std=None):
     preds = torch.cat(all_preds)
     targets = torch.cat(all_targets)
 
+    print(
+        f"  preds:   mean={preds.mean():.4f}  std={preds.std():.4f}  "
+        f"min={preds.min():.4f}  max={preds.max():.4f}",
+        flush=True,
+    )
+    print(
+        f"  targets: mean={targets.mean():.4f}  std={targets.std():.4f}  "
+        f"min={targets.min():.4f}  max={targets.max():.4f}",
+        flush=True,
+    )
+
     test_mse = criterion(preds, targets).item()
     diff = preds - targets
     test_mae = torch.mean(torch.abs(diff)).item()

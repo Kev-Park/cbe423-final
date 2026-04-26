@@ -14,7 +14,6 @@ from huggingface_hub import hf_hub_download
 import loading
 import models
 import data.tools as tools
-import models.graphops as graphops
 
 HF_REPO = "iamkuba/CliqueFlowmer"
 HF_CHECKPOINT = "CliqueFlowmer-MP20-Eform.pth"
@@ -77,20 +76,14 @@ def evaluate_baseline(model, test_data, target_mean=None, target_std=None):
     if target_std is None:
         target_std = float(test_data.get("target_std", 1.0))
 
-    # If targets look raw (physical scale, large spread) re-normalize them so they
-    # match the z-scored space the HF regressor was trained to predict in.
+    # Z-score the raw targets so they match the normalized space the HF regressor predicts in.
     arr = np.array(raw_targets, dtype=np.float32)
-    looks_raw = abs(float(np.mean(arr))) > 0.5 or float(np.std(arr)) > 1.5
-    if looks_raw:
-        print(
-            f"test_form.pkl targets appear unnormalized "
-            f"(mean={np.mean(arr):.3f}, std={np.std(arr):.3f}). "
-            f"Applying z-score with target_mean={target_mean:.4f}, target_std={target_std:.4f}.",
-            flush=True,
-        )
-        test_targets = ((arr - target_mean) / target_std).tolist()
-    else:
-        test_targets = raw_targets
+    print(
+        f"Raw targets: mean={arr.mean():.4f}, std={arr.std():.4f}. "
+        f"Applying z-score: mean={target_mean:.4f}, std={target_std:.4f}.",
+        flush=True,
+    )
+    test_targets = ((arr - target_mean) / target_std).tolist()
 
     test_dataset = tools.MatbenchDataset(test_structures, test_targets, augment=False)
     test_loader = DataLoader(
@@ -164,12 +157,11 @@ if __name__ == "__main__":
     if test_data is None:
         raise FileNotFoundError(f"Could not find {TEST_DATA_PATH}")
 
-    # Pull normalization stats from train.pkl so they match the HF model's training scale.
-    train_data = loading.load_pickled_object_from_local("preprocessed_data/train.pkl")
-    if train_data is None:
-        raise FileNotFoundError("Could not find preprocessed_data/train.pkl for normalization stats")
-    target_mean = float(train_data.get("target_mean", 0.0))
-    target_std = float(train_data.get("target_std", 1.0))
-    print(f"Normalization from train.pkl: mean={target_mean:.4f}, std={target_std:.4f}", flush=True)
+    # Compute normalization stats from the raw training CSV — the same source the HF model
+    # used during training.  train.pkl on this machine was built before z-scoring was added
+    # (it stores mean=0, std=1) so it is not a reliable source.
+    from preprocess_data import compute_train_stats
+    target_mean, target_std = compute_train_stats("raw_data/train.csv")
+    print(f"Normalization from raw_data/train.csv: mean={target_mean:.4f}, std={target_std:.4f}", flush=True)
 
     evaluate_baseline(model, test_data, target_mean=target_mean, target_std=target_std)
